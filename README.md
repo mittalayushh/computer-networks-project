@@ -6,12 +6,11 @@ This project implements a small multi-machine network using four physical macOS 
 
 ## Team Members
 
-| Name | Role |
+| Name | Enrollment |
 |---|---|
-| Ayush Mittal | Team Member |
-| `<Team Member 2>` | Team Member |
-| `<Team Member 3>` | Team Member |
-| `<Team Member 4>` | Team Member |
+| Ayush Mittal | 2401020091 |
+| Saumya Soni | 2401020058  |
+| Anurag Kumar | 2401010088 |
 
 ## Architecture
 
