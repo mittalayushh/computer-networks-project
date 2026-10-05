@@ -123,7 +123,7 @@ make help
 Clone the repository and enter it:
 
 ```bash
-git clone <REPOSITORY_URL>
+git clone https://github.com/mittalayushh/computer-networks-project.git
 cd CN-Phase1-Team1
 ```
 
@@ -150,7 +150,7 @@ Backend A listens on:
 Clone the repository and enter it:
 
 ```bash
-git clone <REPOSITORY_URL>
+git clone https://github.com/mittalayushh/computer-networks-project.git
 cd CN-Phase1-Team1
 ```
 
