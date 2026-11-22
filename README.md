@@ -1,205 +1,185 @@
-# Private Network Service Platform · Team 1
+# Architecture
 
-Four Macs serve two private names, `app.team1.test` and `api.team1.test`. In Phase 1, a client resolves either name to Mac 2 and connects over HTTPS. Nginx terminates TLS and selects one of two HTTP backends. Phase 2 adds a second DNS server, a standby edge, backend access control and recovery exercises.
+![Four-Mac network showing primary and backup DNS, HTTPS traffic to the active nginx edge, and HTTP routes to both backends](assets/network-architecture.png)
 
-**Team:** Ayush Mittal (2401020091), Saumya Soni (2401020058), Anurag Kumar (2401010088).
+# team1 private network service
 
-| Mac | Role | LAN service | Directory |
+Run a private HTTPS service on four Macs connected to the same LAN. Clients resolve `app.team1.test` using team DNS, connect to nginx on port 8443, and receive a response from Backend A or B. The headers `X-Edge` and `X-Backend` identify the two machines involved.
+
+Phase 1 covers private DNS, trusted HTTPS, round-robin load balancing, HTTP cache validation and packet inspection. Phase 2 adds backup DNS, backend failover, firewall isolation and controlled edge migration.
+
+## Machines and traffic
+
+| Folder | Role | Listening ports | Example LAN address |
 |---|---|---|---|
-| 1 | Private DNS | dnsmasq, UDP/TCP 53 | `mac1-dns` |
-| 2 | Primary edge | Nginx, HTTPS/TCP 8443 | `mac2-edge` |
-| 3 | Backend A and test client | Python HTTP/TCP 3001 | `mac3-backend-a` locally or `mac3-backend-a 2` in the published checkout |
-| 4 | Backend B and test client | Python HTTP/TCP 3002. Phase 2 adds DNS on 53 and HTTPS on 8443 | `mac4-backend-b` |
+| mac1-dns | Primary dnsmasq, firewall test client | DNS 53 UDP/TCP | 10.7.15.3 |
+| mac2-edge | Primary nginx reverse proxy and load balancer | HTTPS 8443 TCP | 10.7.19.44 |
+| mac3-backend-a | Python backend A, main test/capture client | HTTP 3001 TCP | 10.7.8.159 |
+| mac4-backend-b | Python backend B, backup DNS, standby nginx, second test client | HTTP 3002 TCP, DNS 53 UDP/TCP, HTTPS 8443 TCP | 10.7.10.8 |
 
-```text
-Client on Mac 3 or 4 ── DNS query ──────► Mac 1 (or Mac 4 in Phase 2)
-                     ◄─ edge IP + TTL ──┘
-Client               ── TLS on 8443 ───► Mac 2 (or Mac 4 after cutover)
-                                             ├── HTTP ──► Mac 3:3001 / A
-                                             └── HTTP ──► Mac 4:3002 / B
-```
+Clients ask Mac 1 or Mac 4 for the address of the edge. Normally both resolvers return Mac 2. During cutover both return Mac 4. The client opens a separate TLS connection to that edge. The edge selects a backend and forwards the request over HTTP. Both backends implement `/`, `/api/status`, and `/cache-demo`. The same DNS records also support `api.team1.test`.
 
-## 1. Prepare the LAN and role directories
+## Repository setup
 
-Use four Macs on the same private LAN with peer communication enabled. Each needs Terminal, Homebrew in its PATH and admin access for its local setup. Have Wireshark available to inspect the capture. Internet access is needed for the initial checkout and dependency installation.
-
-On each Mac, open the existing repository or clone it once:
+The repository uses one shared Makefile and four role directories. Each Mac runs Make inside its own role directory. The following layout can be initialized once from the repository root when the source tree contains `Makefile` and `backend/backend.py`:
 
 ```sh
-git clone https://github.com/mittalayushh/computer-networks-project.git
-cd computer-networks-project
+mkdir -p mac1-dns mac2-edge mac3-backend-a mac4-backend-b
+printf '1\n' > mac1-dns/ROLE
+printf '2\n' > mac2-edge/ROLE
+printf '3\n' > mac3-backend-a/ROLE
+printf '4\n' > mac4-backend-b/ROLE
+cp backend/backend.py mac3-backend-a/backend.py
+cp backend/backend.py mac4-backend-b/backend.py
 ```
 
-From the repository root, **run only the line for that Mac**. Start each additional terminal tab in the same role directory.
+From the repo root, distribute the shared Makefile to each folder:
 
 ```sh
-cd mac1-dns                                                        # Mac 1
-cd mac2-edge                                                       # Mac 2
-if [ -d mac3-backend-a ]; then cd mac3-backend-a; else cd 'mac3-backend-a 2'; fi  # Mac 3
-cd mac4-backend-b                                                  # Mac 4
+for dir in mac1-dns mac2-edge mac3-backend-a mac4-backend-b; do
+  cp Makefile "$dir/Makefile"
+done
 ```
 
-Check the role number and share each Mac's current LAN address. If the default route uses a VPN, select the private LAN route before continuing.
+### Local working directory on each Mac
+
+From the local checkout, select the directory assigned to the machine:
+
+| Machine | Command from repository root | Expected output of `cat ROLE` |
+|---|---|---|
+| Mac 1 | `cd mac1-dns` | 1 |
+| Mac 2 | `cd mac2-edge` | 2 |
+| Mac 3 | `cd mac3-backend-a` | 3 |
+| Mac 4 | `cd mac4-backend-b` | 4 |
+
+Each directory requires `ROLE` and `Makefile`. Macs 3 and 4 also require `backend.py`. All commands below assume this working directory, including commands in a second terminal. Runtime configuration lives in `run/`; the private key stays on the edge that generated it.
+
+## First installation on each Mac
+
+Use a LAN that permits connections between devices. Have administrator access and Homebrew available. Install Apple's command line tools if `make` or Git is missing (`xcode-select --install`). On Apple silicon, if Homebrew is installed but missing from PATH, run `eval "$(/opt/homebrew/bin/brew shellenv)"`. Install Wireshark on Mac 3 for inspecting captures.
 
 ```sh
-cat ROLE
+command -v make brew
 iface=$(route -n get default | awk '/interface:/{print $2}')
 ipconfig getifaddr "$iface"
 ```
 
-On **all four Macs**, run the following and enter the same four current IPs in Mac 1–4 order. Setup installs the role dependencies and writes `run/lan`. Inventory prints interface details, gateway and ping results. Record each IP, netmask, interface, MAC address and gateway for Task A. Check for replies from every peer in each Mac's output.
+Use the same four current LAN addresses on every host. On each Mac:
 
 ```sh
-bash lab setup
-bash lab inventory
+make setup
 cat run/lan
 ```
 
-In each **test tab**, load these variables. The examples use the macOS system curl and bypass any configured HTTP proxy for the lab.
+Enter the IPs in the same Mac 1–4 order on all four machines. Setup installs role dependencies and writes the address file. Use the physical LAN as the default route for the lab; a VPN interface can cause the startup address check to fail.
+
+### TLS certificates and client trust
+
+Skip certificate creation if the existing `edge-2.crt` or `edge-4.crt` and matching `run/edge.key` are present on their respective edges and clients already trust them. The Makefile reuses these files. On a fresh install, run this block **once on Mac 2 and once on Mac 4**, after setup:
 
 ```sh
-source run/lan
-u=https://app.team1.test:8443
-labcurl() { /usr/bin/curl --noproxy '*' --max-time 15 "$@"; }
+role=$(cat ROLE)
+( set -e
+  case "$role" in 2|4) ;; *) echo "Use an edge Mac"; exit 1;; esac
+  test ! -e run/edge.key && test ! -e "edge-$role.crt" || { echo "Existing TLS files; preserve the pair"; exit 1; }
+  umask 077
+  "$(brew --prefix openssl@3)/bin/openssl" req -x509 -newkey rsa:2048 -nodes -sha256 -days 180 \
+    -keyout run/edge.key -out "edge-$role.crt" -subj "/CN=app.team1.test" \
+    -addext "subjectAltName=DNS:app.team1.test,DNS:api.team1.test" \
+    -addext "extendedKeyUsage=serverAuth"
+  shasum -a 256 "edge-$role.crt"
+)
 ```
 
-## 2. Start Phase 1
-
-The service commands below run in the foreground. Keep each in its own tab so that Ctrl-C stops exactly the service you are testing. Use a separate tab for probes. If a port is already occupied, inspect its owner with `make status` before starting a second copy. Saved logs, PID files and generated configs in a checkout describe an earlier run.
-
-1. **Mac 3 and Mac 4** each run `bash lab backend`. From **Mac 2**, run the following checks. Expect HTTP 200, JSON with `status` set to `ok`, and the corresponding `X-Backend` header.
-
-   ```sh
-   labcurl -i "http://$M3:3001/api/status"
-   labcurl -i "http://$M4:3002/api/status"
-   ```
-
-2. Before configuring a client, check whether it already has a `/etc/resolver/team1.test` file. If it does, save a copy and restore it after the demo. The checkout may contain an old `run/resolver-owned` marker.
-
-   **Mac 1** runs `bash lab dns primary`. **Mac 3 and Mac 4** each run `bash lab resolver one`. This configures macOS to use Mac 1 for the project domain. On both clients, verify the two records and the system resolver. All should return Mac 2's address.
-
-   ```sh
-   dig @"$M1" app.team1.test A +noall +answer
-   dig @"$M1" api.team1.test A +noall +answer
-   dscacheutil -q host -a name app.team1.test
-   ```
-
-3. **Mac 2** prepares its TLS identity. Reuse its valid matching `edge-2.crt` and `run/edge.key` if available. A fresh clone includes the public certificate only. In that case, archive that certificate and generate a new local pair using the commands below. Use the same procedure on **Mac 4** with its own role number when preparing the standby. Keep each private key on the edge that generated it.
-
-   ```sh
-   crt="edge-$(cat ROLE).crt"
-   if [ -f "$crt" ] && [ ! -e run/edge.key ]; then
-     saved=$(mktemp -d)
-     mv "$crt" "$saved/"
-     echo "Previous public certificate saved in $saved"
-   fi
-   if [ ! -e "$crt" ] && [ ! -e run/edge.key ]; then bash lab cert; fi
-   openssl x509 -in "$crt" -noout -dates -subject
-   shasum -a 256 "$crt"
-   ```
-
-4. Copy **Mac 2's current public certificate** into both client role directories. On each client, compare `shasum -a 256 edge-2.crt` with Mac 2's output, then run `bash lab trust edge-2.crt`. **Mac 2** runs `bash lab edge`. It generates and checks the Nginx config for this checkout before listening on 8443.
-
-## 3. Verify the healthy Phase 1 path
-
-On **Mac 3**, run `bash lab capture` in one tab. In a second test tab, run:
+Transfer **only the two public certificates** to the role folders on both test clients (Macs 3 and 4). Compare their fingerprints with the respective edge Macs. On each test client, trust both certificates:
 
 ```sh
-bash lab flush
-labcurl -v --http1.1 "$u/"
-labcurl -i "$u/api/status"
+shasum -a 256 edge-2.crt edge-4.crt
+sudo security add-trusted-cert -d -r trustRoot -p ssl -k /Library/Keychains/System.keychain edge-2.crt
+sudo security add-trusted-cert -d -r trustRoot -p ssl -k /Library/Keychains/System.keychain edge-4.crt
+```
+
+## Start and verify
+
+1. On **every Mac**, run `make start`. This starts its local services in the background, configures project-domain resolution on Macs 3 and 4, and records an inventory. Use `make status` to inspect listeners. Keep both nginx services running during verification.
+2. Once all four are ready, run `make inventory` on each. Confirm peer ping results. Use the saved interface, MAC address, mask and gateway to complete the team's IP/service inventory.
+3. On **Mac 3**, run the following and compare the output before running fault tests:
+
+```sh
+make lookup
+make https
 make balance
-labcurl -I "$u/cache-demo"
-labcurl -i -H 'If-None-Match: "team1-cache-v1"' "$u/cache-demo"
+make test
 ```
 
-Stop the capture with Ctrl-C. On **both clients**, run `bash lab test` for the recorded DNS, HTTPS, load-balancing and cache checks, and open `https://app.team1.test:8443/` in a browser.
+Both resolvers should return Mac 2's IP. HTTPS should validate normally and return HTTP 200 with `X-Edge: Mac2`. The balance test should show A and B. The test transcript includes cache headers and a conditional HTTP 304. Run `make test` on Mac 4 too for second-client evidence. A completed command alone does not establish that its output met the pass condition.
 
-| Task | What to verify and save |
+## Phase 1 · Packet flow and service behavior
+
+On Mac 3, open two role-folder tabs. In tab 1 run `make capture`. In tab 2 run `make flush`, then `make https`. Stop only the capture with Control-C. Open the new `evidence/flow-*.pcap` in Wireshark.
+
+| Filter | Annotate |
 |---|---|
-| A · LAN | The four inventories, peer ping results and topology above with your live addresses. |
-| B · DNS | Both names resolve through Mac 1 on two clients. DNS supplies the address used for the subsequent TCP connection. |
-| C · REST | Both backend ports answer from Mac 2. GET requests to `/` and `/api/status` through the edge return backend identity and status. |
-| D · Load balancing | Repeated requests to one URL show `X-Edge: Mac2` and both `X-Backend: A` and `B`. Nginx uses round robin over the two upstreams. |
-| E · TLS | The browser accepts the edge certificate and verbose curl completes hostname and trust validation. Nginx decrypts the request and opens a separate HTTP connection to the backend. |
-| F · Caching | The first cache probe returns 200, `Cache-Control: max-age=60` and an ETag. The conditional GET returns 304 with no body. A fresh cache hit can skip the network request. Revalidation sends a request but can reuse the stored body. An ordinary GET transfers the body. |
-| G · Packet evidence | Open the new `evidence/flow-*.pcap` in Wireshark. Filter on `dns` for the question and A answer, then `tcp.port == 8443` for the SYN, SYN-ACK and ACK. Record both IPs, the ephemeral client port, service port, and sequence/ACK numbers. Decode 8443 as TLS if needed. Identify ClientHello, ServerHello, Certificate, key exchange, ChangeCipherSpec and encrypted handshake/application records. Use verbose curl for the HTTP headers visible at the endpoint. |
+| `dns` | Client query, resolver response, edge IP, UDP source/destination ports |
+| `tcp.port == 8443` | One connection's SYN, SYN-ACK, ACK, ports and sequence/acknowledgement numbers |
+| `tls` | ClientHello, ServerHello, certificate and encrypted records. Use Decode As TLS for port 8443 if necessary. |
 
-**Protocol discussion.** Wi-Fi/Ethernet carries IP, which carries UDP or TCP. DNS normally uses UDP here. HTTPS carries HTTP over TLS over TCP. TCP acknowledgements identify the next byte expected, retransmissions recover loss, and the receive window limits outstanding data. The DNS service corresponds to a private hosted zone, Nginx to an application load balancer, and the backends to application instances. HTTP/3 uses QUIC over UDP. SMTP sends mail and IMAP synchronizes a mailbox.
+Keep the original capture, three labeled screenshots and the corresponding curl transcript. DNS TTL controls address caching. The HTTP ETag and 304 concern content caching.
 
-**HTTP/2 when supported.** On Mac 2, check `nginx -V 2>&1` for `--with-http_v2_module`, and check `/usr/bin/curl -V` on the client for HTTP2. To demonstrate it, stop the foreground edge, copy `run/nginx.conf` to `run/nginx-h2.conf` and enable HTTP/2 in that copy's TLS server block (`http2 on;` on Nginx 1.25.1+, or `listen 8443 ssl http2;` on older builds supporting HTTP/2). Run `nginx -t -c "$PWD/run/nginx-h2.conf"`, then `nginx -c "$PWD/run/nginx-h2.conf" -g 'daemon off;'`. From the client, run `labcurl --http2 -v "$u/"` and verify negotiation of h2. Stop that edge and restart `bash lab edge` for the remaining tests.
+### HTTP cache validation
 
-## 4. Run the five Phase 1 failure tests
-
-Start with both backends healthy and the client using Mac 1 DNS. Run each row in order, saving the output and restoring the baseline before the next row. Client commands below run on **Mac 3**.
-
-| Fault | Change and client probe | Expected observation and recovery |
-|---|---|---|
-| Wrong client resolver | On Mac 3 run `bash lab resolver wrong`, then `labcurl -v "$u/"` and `ping -c 2 "$M2"`. | Name lookup fails or times out while the edge IP still answers. Run `bash lab resolver one` and retry HTTPS. |
-| Wrong A record | On Mac 1 stop DNS with Ctrl-C and run `bash lab dns wrong`. On Mac 3 run `bash lab flush`, `dig @"$M1" app.team1.test +short` and `labcurl -v "$u/"`. | DNS now returns Mac 3, where no edge is listening. Restart Mac 1 DNS with `bash lab dns primary`, flush Mac 3 and retry. |
-| One backend down | Stop only Mac 3's backend with Ctrl-C. Run `make balance`. | Requests succeed through B. Restart `bash lab backend` on Mac 3, wait six seconds, then verify both headers reappear. |
-| Both backends down | Stop the backend tabs on Macs 3 and 4. Run `labcurl -vi "$u/api/status"`. | DNS and TLS succeed, followed by HTTP 502 from Nginx. Restart both backends, wait six seconds and rerun `make balance`. |
-| Wrong destination port | Run `ping -c 2 "$M2"` and `make wrong-port`. | The IP responds but TCP to the unused port 8442 fails. Repeat with `labcurl -i "$u/"` on 8443. |
-
-## 5. Run Phase 2 on the same LAN
-
-### A. Prove backup DNS answers with the primary offline
-
-On **Mac 4**, leave backend B running and start `bash lab dns primary` in another tab. Here `primary` selects **Mac 2 as the answer**. Both DNS servers now publish the same records. On **both clients**, run `bash lab resolver two`. On Mac 3, run `make lookup` and start a new `bash lab capture` in another tab. Stop **Mac 1 DNS** with Ctrl-C. On Mac 3 run:
+On Mac 3, the first GET returns the resource and its validator. The second GET supplies that validator and should return HTTP 304 with no response body.
 
 ```sh
-bash lab flush
-dig @"$M4" app.team1.test +noall +answer
-dscacheutil -q host -a name app.team1.test
-labcurl -i "$u/api/status"
+url=https://app.team1.test:8443/cache-demo
+/usr/bin/curl --noproxy '*' -i "$url"
+/usr/bin/curl --noproxy '*' -i -H 'If-None-Match: "team1-cache-v1"' "$url"
 ```
 
-Allow time for resolver retries. In the capture, identify the system lookup and reply from Mac 4 after the explicit dig. Restart Mac 1 with `bash lab dns primary`. Losing all DNS servers prevents fresh name resolution. Losing a backend leaves resolution operational.
+### Controlled failure checks
 
-### C. Isolate backend ports and prove rollback
+Each row starts with healthy services. Restore the listed configuration before the next test.
 
-Run this before migrating the edge. From **Mac 1 and Mac 2**, run `make probe` and record baseline connectivity. On **each backend Mac**, inspect the current project anchor, apply the role rule and display it:
-
-```sh
-sudo pfctl -a com.apple/cn-team1 -sr
-bash lab isolate
-sudo pfctl -a com.apple/cn-team1 -sr
-```
-
-The helper saves the prior anchor in `run/pf.before` and records a PF enable token. Repeat `make probe` on Mac 2 (both ports reachable) and Mac 1 (both blocked). Inspect each connection result because the probe logs expected failures and continues. On Mac 3, `make balance` should still reach A and B through Mac 2. On **both backends**, run `bash lab restore`, inspect the anchor again and repeat both Macs' probes. Save the before, isolated and restored observations.
-
-### D. Demonstrate backend failover and recovery
-
-From Mac 3, run `make balance` before, during and after stopping its backend tab. During the outage, every successful response should identify B. Restart `bash lab backend`, wait six seconds, then confirm A and B both appear again. Nginx retries failed connections and temporarily avoids a failed upstream (`max_fails=1 fail_timeout=5s`). Mac 2 remains a single point of failure for clients directed to it. Automatic edge failover would require health detection and a coordinated switch to the standby.
-
-### B and E. Measure the DNS TTL during a controlled edge migration
-
-1. On **Mac 4**, prepare its certificate/key pair as in setup, distribute the current `edge-4.crt`, and verify its checksum on the clients. Run `bash lab trust edge-4.crt` on both clients. Start `bash lab edge` on Mac 4 in a third service tab. Keep Mac 2's edge running. From Mac 3, verify the standby independently of DNS:
-
-   ```sh
-   labcurl --resolve "app.team1.test:8443:$M4" -I "$u/"
-   ```
-
-   Expect `X-Edge: Mac4` with successful TLS validation.
-2. With both DNS services still in primary mode, run `dig @"$M1" app.team1.test +noall +answer` on **Mac 3**. Verify the Mac 2 address and 30-second TTL. Start `make watch` on Mac 3. It flushes once, then samples a new HTTPS connection every two seconds. Wait for the first `X-Edge: Mac2`.
-3. Immediately stop the **DNS tabs only** on Macs 1 and 4 and restart both with `bash lab dns standby`. On Mac 4 run `make lookup`, `bash lab flush` and `labcurl -I "$u/"`. Both direct DNS answers should now name Mac 4. The freshly flushed client should reach Mac 4 while the primed Mac 3 may still reach Mac 2 until expiry. Record timestamps and headers from both clients. If the transition took longer than the TTL, repeat it to capture the cached interval.
-4. To demonstrate manual flushing, prime Mac 3 on the standby with `bash lab flush` and `labcurl -I "$u/"`. Switch **both** DNS services back with `bash lab dns primary`. Before 30 seconds elapse, compare Mac 3's `labcurl -I "$u/"` before and after `bash lab flush`. Verify the post-flush request reaches Mac 2. DNS changes steer new connections as each client's cache refreshes.
-
-### F. Diagnose a faculty-injected fault
-
-Run the following on **Mac 3** in order. Record the first unexpected result, one hypothesis and the test that distinguishes it. After correcting the affected service or setting, repeat the failing test and the end-to-end request.
-
-| Layer | Command | What the result tells you |
+| Fault | Demonstrate | Restore |
 |---|---|---|
-| DNS | `make lookup` | Compare each DNS server's answer and TTL with the macOS system lookup. Disagreement can identify a stale cache or inconsistent records. |
-| TCP | `nc -vz -w 3 app.team1.test 8443` | With the correct address, a refusal or timeout points toward listener, port or reachability problems. |
-| TLS | `labcurl -v "$u/"` | Inspect handshake, hostname and certificate trust before interpreting the HTTP status. |
-| HTTP/upstream | `labcurl -i "$u/api/status"` | Inspect status, body, `X-Edge` and `X-Backend`. For a 502, run `make probe` and `tail -n 30 run/error.log` on the active edge, then check the relevant backend listener with `make status`. |
+| Wrong client DNS | Mac 3: `make client-wrong`, `make https`, `make inventory`. Lookup fails; ping still works. | `make client-two` on Mac 3 |
+| Wrong record | Mac 3: `make client-one`. Mac 1: `make dns-wrong`. Mac 3: `make flush`, `make lookup`, `make https`. Observe Mac 1 answering with the wrong IP. | Mac 1: `make dns-primary`; Mac 3: `make client-two` |
+| One backend down | Mac 3: `make backend-stop`, then `make balance`; expect B only. | Mac 3: `make backend-start`, wait six seconds, then `make balance`. |
+| Both down | Macs 3 and 4: `make backend-stop`. Mac 3: `make https`; look for 502. | Both: `make backend-start`; wait six seconds, verify `make balance` on Mac 3. |
+| Wrong port | Mac 3: `make wrong-port`, then `make https`. | Confirm the correct port returns 200. |
 
-## 6. Save evidence, present and clean up
+## Phase 2 · Resilience and recovery
 
-Keep the four inventories, live IP/service map, generated DNS/Nginx configs, firewall baseline and rules, packet captures, curl headers and failure/recovery transcripts. Make targets log under `evidence/`. For manual probes, start `script "evidence/session-$(date +%Y%m%d-%H%M%S).txt"` before the commands and type `exit` when finished. Save a Phase 1 config snapshot before cutover. Run `make bundle` in each role directory to create its local submission ZIP. Complete `evidence/phase2-report.md` with the change, prediction, observed result, evidence filename, diagnosis and learning for each extension, then bundle again to include the final report.
+Each target writes a dated transcript under that Mac's `evidence/`. Run commands in each row in order and restore the stated baseline before proceeding. A terminal error during an intentional failure is evidence; successful recovery is a separate observation.
 
-**Live review order (project brief §8):** (1) topology and inventory, (2) peer pings, (3) private DNS, (4) trusted HTTPS by name, (5) A/B responses, (6) DNS/TCP/TLS capture, (7) caching and 304, (8) single-backend failure, (9) Phase 2 resilience and cutover, (10) faculty fault diagnosis, (11) individual viva.
+| Scenario | Actions, by Mac | Evidence / pass condition |
+|---|---|---|
+| Backend HA | Mac 3: `make balance`, `make backend-stop`, `make balance`, `make backend-start`, `sleep 6`, `make balance`. | A/B → successful B-only requests → A/B. |
+| Backup DNS | Mac 3: start `make capture` in a second tab. Mac 1: `make dns-stop`. Mac 3: `make flush`, then `make https`. End capture. Mac 1: `make dns-primary`. | HTTPS succeeds with a cold client cache. Capture shows a DNS response from Mac 4 returning Mac 2's address. |
+| Isolation and rollback | Mac 1: `make probe`. Macs 3 **and** 4: `make isolate`. Macs 1 **and** 2: `make probe`. Mac 3: `make https`. Macs 3 and 4: `make restore`. Mac 1: `make probe`. | Before/after rollback, Mac 1 reaches both ports. During isolation, both fail from Mac 1 and succeed from Mac 2; HTTPS succeeds. Inspect both probe results. |
+| TTL and edge migration | Follow the timed sequence below, with PF rollback complete. | Both DNS records change, a primed client exhibits TTL behavior, a flushed client switches, and normal HTTPS reaches the standby and returns to primary. |
+| Troubleshooting | Mac 3: `make diagnose` when healthy and again while a fault is present. On the active edge inspect `tail -n 20 run/error.log`. | Identify first failing layer, hypothesis, distinguishing test, correction and retest. |
 
-After the review, restore any active isolation on both backends with `bash lab restore`. Stop the lab's foreground services with Ctrl-C in their own tabs. On each client where this session installed the domain resolver, run `bash lab unresolve`. Remove the lab trust entries you installed using Keychain Access, matching the certificates to the copies used for this run.
+### Timed migration
+
+1. Mac 3: validate the standby before changing DNS with `source run/lan` then `/usr/bin/curl --noproxy '*' --resolve "app.team1.test:8443:$M4" -I https://app.team1.test:8443/`. Expect Mac4. This override is for preflight only.
+2. Mac 4: `make flush`, then `make https` to prime its cache. Mac 3: `make watch`. Once Mac 3 prints Mac2, signal both DNS operators.
+3. Macs 1 and 4: each run `make dns-standby`. Mac 4: `make lookup`, `make flush`, `make https`. The two DNS answers should show the standby IP and TTL 30. The flushed client should reach Mac4.
+4. Let Mac 3's watch finish without flushing it. Save the timed change from Mac2 to Mac4. If the old cached answer was missed, repeat during return. The number 30 in a DNS response establishes the configured TTL; timed client observations establish the cache effect.
+5. Macs 1 and 4: each run `make dns-primary`. After expiry, Mac 3: `make lookup`, `make https`. Expect both answers to match Mac 2 and HTTPS to show Mac2.
+
+## If a check fails
+
+| Symptom | First check / next action |
+|---|---|
+| Missing ROLE, run/lan, or Make target | Check `pwd`, `cat ROLE` and the role Makefile. Run `make setup` for a new role folder. |
+| Address already in use | Use `sudo lsof -nP -iUDP:53` or `sudo lsof -nP -iTCP:8443 -sTCP:LISTEN`. Inspect the **current** PID with `ps -ww -p PID -o command=`. If an earlier foreground project service owns it, stop that service in its original tab, then use `make start`. Start failure tests with Make-managed services so their PID files exist. |
+| DNS servers disagree | `make lookup` checks each server. Restore the intended mode on the stale resolver, then check the client cache. Preserve the cache during TTL observation. |
+| TCP connection fails | `make status` on the target edge; confirm nginx listens on 8443 and both peers have LAN connectivity. |
+| TLS validation fails | Verify domain, active edge, certificate dates, matching edge files and that client's trust for that edge certificate. |
+| HTTP 502 | Test the two backend ports from the active edge, read nginx's error log, and check backend logs in `run/backend.log`. |
+| Existing scoped resolver prevents startup | Inspect `/etc/resolver/team1.test`. Preserve an existing user-managed file. Reuse the original project folder if it owns that configuration, or manually reconcile the resolver with your network administrator. |
+
+## Local diagnostic files
+
+Make targets save timestamped terminal output in the role's `evidence/` directory. Packet captures use `flow-*.pcap`. The active edge writes nginx errors to `run/error.log`; the Python service writes startup and request output to `run/backend.log`. Use the timestamp and hostname to correlate a client failure with the corresponding server event.

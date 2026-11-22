@@ -1,0 +1,7 @@
+Mon Nov 23 01:54:50 IST 2026
+MacBook-Pro-5.local
+make probe
+nc: connectx to 10.7.8.159 port 3001 (tcp) failed: Connection refused
+Connection failed
+nc: connectx to 10.7.10.8 port 3002 (tcp) failed: Connection refused
+Connection failed

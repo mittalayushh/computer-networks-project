@@ -1,0 +1,20 @@
+Script started on Mon Nov 23 00:37:25 2026
+The operation couldn’t be completed. Unable to locate a Java Runtime.
+Please visit http://www.java.com for information on installing Java.
+
+[1m[7m%[27m[1m[0m                                                                                ]7;file://MacBook-Pro-5.local/Users/anuragkumar/Desktop/mac1-dns[0m[27m[24m[Januragkumar@MacBook-Pro-5 mac1-dns % [K[?2004h[7msource run/lan[27m
+[7mu=https://app.team1.test:8443[27m[K
+[7mdate[27m[K
+[7mhostname[27m[K
+[7mprintf 'Mac1 DNS=%s\nMac2 edge=%s\nMac3 A=%s\nMac4 B=%s\n' "$M1" "$M2" "$M3" "$M[7m4[7m"[27m[K[5A[35C[27ms[27mo[27mu[27mr[27mc[27me[27m [27mr[27mu[27mn[27m/[27ml[27ma[27mn[1B[27mu[27m=[27mh[27mt[27mt[27mp[27ms[27m:[27m/[27m/[27ma[27mp[27mp[27m.[27mt[27me[27ma[27mm[27m1[27m.[27mt[27me[27ms[27mt[27m:[27m8[27m4[27m4[27m3[1B[27md[27ma[27mt[27me[1B[27mh[27mo[27ms[27mt[27mn[27ma[27mm[27me[1B[27mp[27mr[27mi[27mn[27mt[27mf[27m [27m'[27mM[27ma[27mc[27m1[27m [27mD[27mN[27mS[27m=[27m%[27ms[27m\[27mn[27mM[27ma[27mc[27m2[27m [27me[27md[27mg[27me[27m=[27m%[27ms[27m\[27mn[27mM[27ma[27mc[27m3[27m [27mA[27m=[27m%[27ms[27m\[27mn[27mM[27ma[27mc[27m4[27m [27mB[27m=[27m%[27ms[27m\[27mn[27m'[27m [27m"[27m$[27mM[27m1[27m"[27m [27m"[27m$[27mM[27m2[27m"[27m [27m"[27m$[27mM[27m3[27m"[27m [27m"[27m$[27mM4[27m"[?2004l
+Mon Nov 23 00:37:36 IST 2026
+MacBook-Pro-5.local
+Mac1 DNS=10.7.15.3
+Mac2 edge=10.7.19.44
+Mac3 A=10.7.8.159
+Mac4 B=10.7.10.8
+[1m[7m%[27m[1m[0m                                                                                ]7;file://MacBook-Pro-5.local/Users/anuragkumar/Desktop/mac1-dns[0m[27m[24m[Januragkumar@MacBook-Pro-5 mac1-dns % [K[?2004hddocs  d  source run/lan
+u=https://app.team1.test:8443[K
+date[K
+hostname[K
+printf 'Mac1 DNS=%s\nMac2 edge=%s\nMac3 A=%s\nMac4 B=%s\n' "$M1" "$M2" "$M3" "$M4"[K[A[A[A[A[A[37Cbash lab dns primary[1B[K[1B[K[1B[K[1B[K[1B[K[5A[57C[20Dsudo kill -TERM 94680[1Bsleep 1[K[1Bsudo lsof -nP -iUDP:53[K[A[1B[A[A[37Cbash lab dns primary [1B[K[1B[K[A[A[57C

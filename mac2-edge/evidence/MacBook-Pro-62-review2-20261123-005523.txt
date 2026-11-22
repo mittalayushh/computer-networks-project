@@ -1,0 +1,53 @@
+Script started on Mon Nov 23 00:55:23 2026
+[1m[7m%[27m[1m[0m                                                                                ]7;file://MacBook-Pro-62.local/Users/luffy/desktop/mac2-edge[0m[27m[24m[Jluffy@MacBook-Pro-62 mac2-edge % [K[?2004h[7mdate[27m
+[7mhostname[27m[K
+[7msource run/lan[27m[K
+[7mprintf 'Mac1=%s  Mac2=%s  Mac3=%s  Mac4=%s\n' "$M1" "$M2" "$M3" "$M4"[27m[K
+[7mroute -n get default[27m[K[4A[13C[27md[27ma[27mt[27me[1B[27mh[27mo[27ms[27mt[27mn[27ma[27mm[27me[1B[27ms[27mo[27mu[27mr[27mc[27me[27m [27mr[27mu[27mn[27m/[27ml[27ma[27mn[1B[27mp[27mr[27mi[27mn[27mt[27mf[27m [27m'[27mM[27ma[27mc[27m1[27m=[27m%[27ms[27m [27m [27mM[27ma[27mc[27m2[27m=[27m%[27ms[27m [27m [27mM[27ma[27mc[27m3[27m=[27m%[27ms[27m [27m [27mM[27ma[27mc[27m4[27m=[27m%[27ms[27m\[27mn[27m'[27m [27m"[27m$[27mM[27m1[27m"[27m [27m"[27m$[27mM[27m2[27m"[27m [27m"[27m$[27mM[27m3[27m"[27m [27m"[27m$[27mM[27m4[27m"[1B[27mr[27mo[27mu[27mt[27me[27m [27m-[27mn[27m [27mg[27me[27mt[27m [27md[27me[27mf[27ma[27mu[27ml[27mt[?2004l
+Mon Nov 23 00:55:40 IST 2026
+MacBook-Pro-62.local
+Mac1=10.7.15.3  Mac2=10.7.19.44  Mac3=10.7.8.159  Mac4=10.7.10.8
+   route to: default
+destination: default
+       mask: default
+    gateway: 10.7.0.1
+  interface: en0
+      flags: <UP,GATEWAY,DONE,STATIC,PRCLONING,GLOBAL>
+ recvpipe  sendpipe  ssthresh  rtt,msec    rttvar  hopcount      mtu     expire
+       0         0         0         0         0         0      1500         0 
+[1m[7m%[27m[1m[0m                                                                                ]7;file://MacBook-Pro-62.local/Users/luffy/desktop/mac2-edge[0m[27m[24m[Jluffy@MacBook-Pro-62 mac2-edge % [K[?2004h[7mifconfig en0[27m
+[7mipconfig getifaddr en0[27m[K[A[11C[27mi[27mf[27mc[27mo[27mn[27mf[27mi[27mg[27m [27me[27mn[27m0[1B[27mi[27mp[27mc[27mo[27mn[27mf[27mi[27mg[27m [27mg[27me[27mt[27mi[27mf[27ma[27md[27md[27mr[27m [27me[27mn[27m0[?2004l
+en0: flags=8863<UP,BROADCAST,SMART,RUNNING,SIMPLEX,MULTICAST> mtu 1500
+	options=6460<TSO4,TSO6,CHANNEL_IO,PARTIAL_CSUM,ZEROINVERT_CSUM>
+	ether ee:39:59:76:40:9e
+	inet6 fe80::cd3:e89a:d848:65ce%en0 prefixlen 64 secured scopeid 0xb 
+	inet 10.7.19.44 netmask 0xffffe000 broadcast 10.7.31.255
+	nd6 options=201<PERFORMNUD,DAD>
+	media: autoselect
+	status: active
+10.7.19.44
+[1m[7m%[27m[1m[0m                                                                                ]7;file://MacBook-Pro-62.local/Users/luffy/desktop/mac2-edge[0m[27m[24m[Jluffy@MacBook-Pro-62 mac2-edge % [K[?2004h[7msudo lsof -nP -iTCP -sTCP:LISTEN[27m
+[7msudo lsof -nP -iUDP:53[27m[K[A[11C[27ms[27mu[27md[27mo[27m [27ml[27ms[27mo[27mf[27m [27m-[27mn[27mP[27m [27m-[27mi[27mT[27mC[27mP[27m [27m-[27ms[27mT[27mC[27mP[27m:[27mL[27mI[27mS[27mT[27mE[27mN[1B[27ms[27mu[27md[27mo[27m [27ml[27ms[27mo[27mf[27m [27m-[27mn[27mP[27m [27m-[27mi[27mU[27mD[27mP[27m:[27m5[27m3[?2004l
+Password:
+COMMAND     PID  USER   FD   TYPE             DEVICE SIZE/OFF NODE NAME
+launchd       1  root   21u  IPv6 0x939f782f1dbef7f0      0t0  TCP *:445 (LISTEN)
+launchd       1  root   22u  IPv4 0xc1f420019b0fdab4      0t0  TCP *:445 (LISTEN)
+launchd       1  root   24u  IPv6 0x939f782f1dbef7f0      0t0  TCP *:445 (LISTEN)
+launchd       1  root   26u  IPv4 0xc1f420019b0fdab4      0t0  TCP *:445 (LISTEN)
+launchd       1  root   34u  IPv6 0xcc8298d8424d2f87      0t0  TCP [::1]:8021 (LISTEN)
+launchd       1  root   36u  IPv4 0x2714b6a4226e0a05      0t0  TCP 127.0.0.1:8021 (LISTEN)
+launchd       1  root   37u  IPv6 0xcc8298d8424d2f87      0t0  TCP [::1]:8021 (LISTEN)
+launchd       1  root   38u  IPv4 0x2714b6a4226e0a05      0t0  TCP 127.0.0.1:8021 (LISTEN)
+kdc         407  root    5u  IPv6 0x22aeee0738c7e368      0t0  TCP *:88 (LISTEN)
+kdc         407  root    7u  IPv4 0x728296e4bb89d6b9      0t0  TCP *:88 (LISTEN)
+rapportd    622 luffy   10u  IPv4 0x726f72afee5055c2      0t0  TCP *:56957 (LISTEN)
+rapportd    622 luffy   11u  IPv6 0xa86ed2e31158e5b5      0t0  TCP *:56957 (LISTEN)
+rapportd    622 luffy   18u  IPv6 0x3ba80ebe0154546e      0t0  TCP *:54614 (LISTEN)
+rapportd    622 luffy   20u  IPv6 0xcdc2b7df9ec8f3ca      0t0  TCP *:54615 (LISTEN)
+Code\x20H  2495 luffy   37u  IPv4 0x503ec16a29805b05      0t0  TCP 127.0.0.1:49616 (LISTEN)
+nginx     42172 luffy    6u  IPv4 0xcd10892ff7df2450      0t0  TCP *:8443 (LISTEN)
+Electron  42449 luffy   44u  IPv4  0x351cb29bf85446a      0t0  TCP 127.0.0.1:55484 (LISTEN)
+agy       42516 luffy   10u  IPv4 0x4ac637e30cada920      0t0  TCP 127.0.0.1:55515 (LISTEN)
+agy       42516 luffy   11u  IPv4  0x6060326c149aff3      0t0  TCP 127.0.0.1:55504 (LISTEN)
+nginx     44859 luffy    6u  IPv4 0xcd10892ff7df2450      0t0  TCP *:8443 (LISTEN)
+[1m[7m%[27m[1m[0m                                                                                ]7;file://MacBook-Pro-62.local/Users/luffy/desktop/mac2-edge[0m[27m[24m[Jluffy@MacBook-Pro-62 mac2-edge % [K[?2004h

@@ -1,0 +1,48 @@
+Mon Nov 23 01:48:07 IST 2026
+MacBook-Pro-5.local
+make start
+MacBook-Pro-5.local
+en0: flags=8863<UP,BROADCAST,SMART,RUNNING,SIMPLEX,MULTICAST> mtu 1500
+	options=6460<TSO4,TSO6,CHANNEL_IO,PARTIAL_CSUM,ZEROINVERT_CSUM>
+	ether 86:69:91:22:52:b6
+	inet6 fe80::1cd7:1f8f:ffa1:1c5b%en0 prefixlen 64 secured scopeid 0xb 
+	inet 10.7.15.3 netmask 0xffffe000 broadcast 10.7.31.255
+	nd6 options=201<PERFORMNUD,DAD>
+	media: autoselect
+	status: active
+   route to: default
+destination: default
+       mask: default
+    gateway: 10.7.0.1
+  interface: en0
+      flags: <UP,GATEWAY,DONE,STATIC,PRCLONING,GLOBAL>
+ recvpipe  sendpipe  ssthresh  rtt,msec    rttvar  hopcount      mtu     expire
+       0         0         0         0         0         0      1500         0 
+PING 10.7.15.3 (10.7.15.3): 56 data bytes
+64 bytes from 10.7.15.3: icmp_seq=0 ttl=64 time=0.102 ms
+64 bytes from 10.7.15.3: icmp_seq=1 ttl=64 time=0.294 ms
+
+--- 10.7.15.3 ping statistics ---
+2 packets transmitted, 2 packets received, 0.0% packet loss
+round-trip min/avg/max/stddev = 0.102/0.198/0.294/0.096 ms
+PING 10.7.19.44 (10.7.19.44): 56 data bytes
+64 bytes from 10.7.19.44: icmp_seq=0 ttl=64 time=242.227 ms
+64 bytes from 10.7.19.44: icmp_seq=1 ttl=64 time=82.589 ms
+
+--- 10.7.19.44 ping statistics ---
+2 packets transmitted, 2 packets received, 0.0% packet loss
+round-trip min/avg/max/stddev = 82.589/162.408/242.227/79.819 ms
+PING 10.7.8.159 (10.7.8.159): 56 data bytes
+64 bytes from 10.7.8.159: icmp_seq=0 ttl=64 time=42.519 ms
+64 bytes from 10.7.8.159: icmp_seq=1 ttl=64 time=116.195 ms
+
+--- 10.7.8.159 ping statistics ---
+2 packets transmitted, 2 packets received, 0.0% packet loss
+round-trip min/avg/max/stddev = 42.519/79.357/116.195/36.838 ms
+PING 10.7.10.8 (10.7.10.8): 56 data bytes
+64 bytes from 10.7.10.8: icmp_seq=0 ttl=64 time=196.853 ms
+64 bytes from 10.7.10.8: icmp_seq=1 ttl=64 time=204.815 ms
+
+--- 10.7.10.8 ping statistics ---
+2 packets transmitted, 2 packets received, 0.0% packet loss
+round-trip min/avg/max/stddev = 196.853/200.834/204.815/3.981 ms

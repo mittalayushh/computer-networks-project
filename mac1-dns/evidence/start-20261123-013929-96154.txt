@@ -1,0 +1,48 @@
+Mon Nov 23 01:39:29 IST 2026
+MacBook-Pro-5.local
+make start
+MacBook-Pro-5.local
+en0: flags=8863<UP,BROADCAST,SMART,RUNNING,SIMPLEX,MULTICAST> mtu 1500
+	options=6460<TSO4,TSO6,CHANNEL_IO,PARTIAL_CSUM,ZEROINVERT_CSUM>
+	ether 86:69:91:22:52:b6
+	inet6 fe80::1cd7:1f8f:ffa1:1c5b%en0 prefixlen 64 secured scopeid 0xb 
+	inet 10.7.15.3 netmask 0xffffe000 broadcast 10.7.31.255
+	nd6 options=201<PERFORMNUD,DAD>
+	media: autoselect
+	status: active
+   route to: default
+destination: default
+       mask: default
+    gateway: 10.7.0.1
+  interface: en0
+      flags: <UP,GATEWAY,DONE,STATIC,PRCLONING,GLOBAL>
+ recvpipe  sendpipe  ssthresh  rtt,msec    rttvar  hopcount      mtu     expire
+       0         0         0         0         0         0      1500         0 
+PING 10.7.15.3 (10.7.15.3): 56 data bytes
+64 bytes from 10.7.15.3: icmp_seq=0 ttl=64 time=0.082 ms
+64 bytes from 10.7.15.3: icmp_seq=1 ttl=64 time=0.235 ms
+
+--- 10.7.15.3 ping statistics ---
+2 packets transmitted, 2 packets received, 0.0% packet loss
+round-trip min/avg/max/stddev = 0.082/0.159/0.235/0.076 ms
+PING 10.7.19.44 (10.7.19.44): 56 data bytes
+64 bytes from 10.7.19.44: icmp_seq=0 ttl=64 time=15.839 ms
+64 bytes from 10.7.19.44: icmp_seq=1 ttl=64 time=10.755 ms
+
+--- 10.7.19.44 ping statistics ---
+2 packets transmitted, 2 packets received, 0.0% packet loss
+round-trip min/avg/max/stddev = 10.755/13.297/15.839/2.542 ms
+PING 10.7.8.159 (10.7.8.159): 56 data bytes
+64 bytes from 10.7.8.159: icmp_seq=0 ttl=64 time=119.903 ms
+64 bytes from 10.7.8.159: icmp_seq=1 ttl=64 time=8.186 ms
+
+--- 10.7.8.159 ping statistics ---
+2 packets transmitted, 2 packets received, 0.0% packet loss
+round-trip min/avg/max/stddev = 8.186/64.044/119.903/55.859 ms
+PING 10.7.10.8 (10.7.10.8): 56 data bytes
+64 bytes from 10.7.10.8: icmp_seq=0 ttl=64 time=15.928 ms
+64 bytes from 10.7.10.8: icmp_seq=1 ttl=64 time=36.306 ms
+
+--- 10.7.10.8 ping statistics ---
+2 packets transmitted, 2 packets received, 0.0% packet loss
+round-trip min/avg/max/stddev = 15.928/26.117/36.306/10.189 ms

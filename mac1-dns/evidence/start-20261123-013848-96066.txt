@@ -1,0 +1,5 @@
+Mon Nov 23 01:38:48 IST 2026
+MacBook-Pro-5.local
+make start
+
+dnsmasq: failed to create listening socket for 10.7.15.3: Address already in use

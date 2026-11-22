@@ -1,0 +1,48 @@
+Mon Nov 23 01:40:57 IST 2026
+MacBook-Pro-62.local
+make inventory
+MacBook-Pro-62.local
+en0: flags=8863<UP,BROADCAST,SMART,RUNNING,SIMPLEX,MULTICAST> mtu 1500
+	options=6460<TSO4,TSO6,CHANNEL_IO,PARTIAL_CSUM,ZEROINVERT_CSUM>
+	ether ee:39:59:76:40:9e
+	inet6 fe80::cd3:e89a:d848:65ce%en0 prefixlen 64 secured scopeid 0xb 
+	inet 10.7.19.44 netmask 0xffffe000 broadcast 10.7.31.255
+	nd6 options=201<PERFORMNUD,DAD>
+	media: autoselect
+	status: active
+   route to: default
+destination: default
+       mask: default
+    gateway: 10.7.0.1
+  interface: en0
+      flags: <UP,GATEWAY,DONE,STATIC,PRCLONING,GLOBAL>
+ recvpipe  sendpipe  ssthresh  rtt,msec    rttvar  hopcount      mtu     expire
+       0         0         0         0         0         0      1500         0 
+PING 10.7.15.3 (10.7.15.3): 56 data bytes
+64 bytes from 10.7.15.3: icmp_seq=0 ttl=64 time=104.826 ms
+64 bytes from 10.7.15.3: icmp_seq=1 ttl=64 time=9.102 ms
+
+--- 10.7.15.3 ping statistics ---
+2 packets transmitted, 2 packets received, 0.0% packet loss
+round-trip min/avg/max/stddev = 9.102/56.964/104.826/47.862 ms
+PING 10.7.19.44 (10.7.19.44): 56 data bytes
+64 bytes from 10.7.19.44: icmp_seq=0 ttl=64 time=0.958 ms
+64 bytes from 10.7.19.44: icmp_seq=1 ttl=64 time=1.752 ms
+
+--- 10.7.19.44 ping statistics ---
+2 packets transmitted, 2 packets received, 0.0% packet loss
+round-trip min/avg/max/stddev = 0.958/1.355/1.752/0.397 ms
+PING 10.7.8.159 (10.7.8.159): 56 data bytes
+64 bytes from 10.7.8.159: icmp_seq=0 ttl=64 time=48.172 ms
+64 bytes from 10.7.8.159: icmp_seq=1 ttl=64 time=7.143 ms
+
+--- 10.7.8.159 ping statistics ---
+2 packets transmitted, 2 packets received, 0.0% packet loss
+round-trip min/avg/max/stddev = 7.143/27.657/48.172/20.514 ms
+PING 10.7.10.8 (10.7.10.8): 56 data bytes
+64 bytes from 10.7.10.8: icmp_seq=0 ttl=64 time=14.695 ms
+64 bytes from 10.7.10.8: icmp_seq=1 ttl=64 time=31.929 ms
+
+--- 10.7.10.8 ping statistics ---
+2 packets transmitted, 2 packets received, 0.0% packet loss
+round-trip min/avg/max/stddev = 14.695/23.312/31.929/8.617 ms
