@@ -1,0 +1,32 @@
+#!/bin/bash
+set -eu
+cd "$(dirname "$0")"
+role=$(cat ROLE)
+mkdir -p run evidence
+if [[ ${1:-} == setup ]]; then
+  command -v brew >/dev/null || { echo 'Install Homebrew and enable brew in PATH first.'; exit 1; }
+  brew install python
+  case $role in 1|4) brew install dnsmasq;; esac
+  case $role in 2|4) brew install nginx openssl@3;; esac
+  python3 - <<'PY'
+import ipaddress
+from pathlib import Path
+ips = []
+with open('/dev/tty') as tty:
+    for i in range(1,5):
+        print(f'Mac {i} LAN IPv4: ',end='',flush=True)
+        ip = str(ipaddress.IPv4Address(tty.readline().strip()))
+        if ip in ips: raise SystemExit('Each Mac needs its own address')
+        ips.append(ip)
+Path('run/lan').write_text(''.join(f'M{i}={ip}\n' for i,ip in enumerate(ips,1)))
+PY
+  exit
+fi
+source run/lan
+iface=$(route -n get default | awk '/interface:/{print $2}')
+url=https://app.team1.test:8443
+case ${1:-} in
+ inventory)
+  { hostname; ifconfig "$iface"; route -n get default; for ip in "$M1" "$M2" "$M3" "$M4"; do ping -c 2 "$ip"; done; } 2>&1 | tee evidence/inventory.txt ;;
+ *) echo 'See RUNBOOK.md'; exit 2;;
+esac
