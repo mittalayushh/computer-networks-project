@@ -1,0 +1,142 @@
+Script started on Mon Nov 23 00:39:46 2026
+[1m[7m%[27m[1m[0m                                                                                                                     ]7;file://Tanishs-MacBook-Air.local/Users/tanish/desktop/mac4-backend-b]2;tanish@Tanishs-MacBook-Air]1;..ac4-backend-b]7;file://Tanishs-MacBook-Air.local/Users/tanish/desktop/mac4-backend-b\[0m[27m[24m[J[01;32m➜  [36mmac4-backend-b[00m [K[?1h=[?2004hcclear[?1l>[?2004l
+]2;clear]1;clear[3J[H[2J[1m[7m%[27m[1m[0m                                                                                                                     ]7;file://Tanishs-MacBook-Air.local/Users/tanish/desktop/mac4-backend-b]2;tanish@Tanishs-MacBook-Air]1;..ac4-backend-b]7;file://Tanishs-MacBook-Air.local/Users/tanish/desktop/mac4-backend-b\[0m[27m[24m[J[01;32m➜  [36mmac4-backend-b[00m [K[?1h=[?2004h[7mmkdir -p evidence[27m
+[7mscript -a "evidence/$(hostname -s)-rehearsal-$(date +%Y%m%d-%H%M%S).txt"[27m[K[A[54D[27mm[27mk[27md[27mi[27mr[27m [27m-[27mp[27m [27me[27mv[27mi[27md[27me[27mn[27mc[27me[1B[27ms[27mc[27mr[27mi[27mp[27mt[27m [27m-[27ma[27m [27m"[27me[27mv[27mi[27md[27me[27mn[27mc[27me[27m/[27m$[27m([27mh[27mo[27ms[27mt[27mn[27ma[27mm[27me[27m [27m-[27ms[27m)[27m-[27mr[27me[27mh[27me[27ma[27mr[27ms[27ma[27ml[27m-[27m$[27m([27md[27ma[27mt[27me[27m [27m+[27m%[27mY[27m%[27mm[27m%[27md[27m-[27m%[27mH[27m%[27mM[27m%[27mS[27m)[27m.[27mt[27mx[27mt[27m"[?1l>[?2004l
+]2;mkdir -p evidence; script -a ]1;mkdirScript started, output file is evidence/Tanishs-MacBook-Air-rehearsal-20261123-004208.txt
+[1m[7m%[27m[1m[0m                                                                                                                     ]7;file://Tanishs-MacBook-Air.local/Users/tanish/desktop/mac4-backend-b]2;tanish@Tanishs-MacBook-Air]1;..ac4-backend-b]7;file://Tanishs-MacBook-Air.local/Users/tanish/desktop/mac4-backend-b\[0m[27m[24m[J[01;32m➜  [36mmac4-backend-b[00m [K[?1h=[?2004h[7msource run/lan[27m
+[7mu=https://app.team1.test:8443[27m[K
+[7mdate[27m[K
+[7mhostname[27m[K
+[7mprintf 'Mac1 DNS=%s\nMac2 edge=%s\nMac3 A=%s\nMac4 B=%s\n' "$M1" "$M2" "$M3" "$M4"[27m[K[4A[64D[27ms[27mo[27mu[27mr[27mc[27me[27m [27mr[27mu[27mn[27m/[27ml[27ma[27mn[1B[27mu[27m=[27mh[27mt[27mt[27mp[27ms[27m:[27m/[27m/[27ma[27mp[27mp[27m.[27mt[27me[27ma[27mm[27m1[27m.[27mt[27me[27ms[27mt[27m:[27m8[27m4[27m4[27m3[1B[27md[27ma[27mt[27me[1B[27mh[27mo[27ms[27mt[27mn[27ma[27mm[27me[1B[27mp[27mr[27mi[27mn[27mt[27mf[27m [27m'[27mM[27ma[27mc[27m1[27m [27mD[27mN[27mS[27m=[27m%[27ms[27m\[27mn[27mM[27ma[27mc[27m2[27m [27me[27md[27mg[27me[27m=[27m%[27ms[27m\[27mn[27mM[27ma[27mc[27m3[27m [27mA[27m=[27m%[27ms[27m\[27mn[27mM[27ma[27mc[27m4[27m [27mB[27m=[27m%[27ms[27m\[27mn[27m'[27m [27m"[27m$[27mM[27m1[27m"[27m [27m"[27m$[27mM[27m2[27m"[27m [27m"[27m$[27mM[27m3[27m"[27m [27m"[27m$[27mM[27m4[27m"[?1l>[?2004l
+]2;source run/lan; u=https://app.team1.test:8443 ; date; hostname; printf  "$M1"]1;sourceMon Nov 23 00:42:14 IST 2026
+Tanishs-MacBook-Air.local
+Mac1 DNS=10.7.15.3
+Mac2 edge=10.7.19.44
+Mac3 A=10.7.8.159
+Mac4 B=10.7.10.8
+[1m[7m%[27m[1m[0m                                                                                                                     ]7;file://Tanishs-MacBook-Air.local/Users/tanish/desktop/mac4-backend-b]2;tanish@Tanishs-MacBook-Air]1;..ac4-backend-b]7;file://Tanishs-MacBook-Air.local/Users/tanish/desktop/mac4-backend-b\[0m[27m[24m[J[01;32m➜  [36mmac4-backend-b[00m [K[?1h=[?2004h[7mbash lab inventory[27m[18D[27mb[27ma[27ms[27mh[27m [27ml[27ma[27mb[27m [27mi[27mn[27mv[27me[27mn[27mt[27mo[27mr[27my[?1l>[?2004l
+]2;bash lab inventory]1;bashTanishs-MacBook-Air.local
+en0: flags=8863<UP,BROADCAST,SMART,RUNNING,SIMPLEX,MULTICAST> mtu 1500
+	options=6460<TSO4,TSO6,CHANNEL_IO,PARTIAL_CSUM,ZEROINVERT_CSUM>
+	ether 02:00:00:00:00:00
+	inet6 fe80::14b3:707c:132:a0d3%en0 prefixlen 64 secured scopeid 0xb 
+	inet 10.7.10.8 netmask 0xffffe000 broadcast 10.7.31.255
+	nd6 options=201<PERFORMNUD,DAD>
+	media: autoselect
+	status: active
+   route to: default
+destination: default
+       mask: default
+    gateway: 10.7.0.1
+  interface: en0
+      flags: <UP,GATEWAY,DONE,STATIC,PRCLONING,GLOBAL>
+ recvpipe  sendpipe  ssthresh  rtt,msec    rttvar  hopcount      mtu     expire
+       0         0         0         0         0         0      1500         0 
+PING 10.7.15.3 (10.7.15.3): 56 data bytes
+64 bytes from 10.7.15.3: icmp_seq=0 ttl=64 time=14.275 ms
+64 bytes from 10.7.15.3: icmp_seq=1 ttl=64 time=57.122 ms
+
+--- 10.7.15.3 ping statistics ---
+2 packets transmitted, 2 packets received, 0.0% packet loss
+round-trip min/avg/max/stddev = 14.275/35.699/57.122/21.423 ms
+PING 10.7.19.44 (10.7.19.44): 56 data bytes
+64 bytes from 10.7.19.44: icmp_seq=0 ttl=64 time=61.713 ms
+64 bytes from 10.7.19.44: icmp_seq=1 ttl=64 time=79.481 ms
+
+--- 10.7.19.44 ping statistics ---
+2 packets transmitted, 2 packets received, 0.0% packet loss
+round-trip min/avg/max/stddev = 61.713/70.597/79.481/8.884 ms
+PING 10.7.8.159 (10.7.8.159): 56 data bytes
+64 bytes from 10.7.8.159: icmp_seq=0 ttl=64 time=8.920 ms
+64 bytes from 10.7.8.159: icmp_seq=1 ttl=64 time=17.638 ms
+
+--- 10.7.8.159 ping statistics ---
+2 packets transmitted, 2 packets received, 0.0% packet loss
+round-trip min/avg/max/stddev = 8.920/13.279/17.638/4.359 ms
+PING 10.7.10.8 (10.7.10.8): 56 data bytes
+64 bytes from 10.7.10.8: icmp_seq=0 ttl=64 time=0.869 ms
+64 bytes from 10.7.10.8: icmp_seq=1 ttl=64 time=1.363 ms
+
+--- 10.7.10.8 ping statistics ---
+2 packets transmitted, 2 packets received, 0.0% packet loss
+round-trip min/avg/max/stddev = 0.869/1.116/1.363/0.247 ms
+[1m[7m%[27m[1m[0m                                                                                                                     ]7;file://Tanishs-MacBook-Air.local/Users/tanish/desktop/mac4-backend-b]2;tanish@Tanishs-MacBook-Air]1;..ac4-backend-b]7;file://Tanishs-MacBook-Air.local/Users/tanish/desktop/mac4-backend-b\[0m[27m[24m[J[01;32m➜  [36mmac4-backend-b[00m [K[?1h=[?2004h[7mdig @"$M1" app.team1.test and dig @"$M1" api.team1.test[27m[55D[27md[27mi[27mg[27m [27m@[27m"[27m$[27mM[27m1[27m"[27m [27ma[27mp[27mp[27m.[27mt[27me[27ma[27mm[27m1[27m.[27mt[27me[27ms[27mt[27m [27ma[27mn[27md[27m [27md[27mi[27mg[27m [27m@[27m"[27m$[27mM[27m1[27m"[27m [27ma[27mp[27mi[27m.[27mt[27me[27ma[27mm[27m1[27m.[27mt[27me[27ms[27mt[?1l>[?2004l
+]2;dig @"$M1" app.team1.test and dig @"$M1" api.team1.test]1;dig
+; <<>> DiG 9.10.6 <<>> @10.7.15.3 app.team1.test and dig @10.7.15.3 api.team1.test
+; (1 server found)
+;; global options: +cmd
+;; Got answer:
+;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 9236
+;; flags: qr aa rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version: 0, flags:; udp: 1232
+;; QUESTION SECTION:
+;app.team1.test.			IN	A
+
+;; ANSWER SECTION:
+app.team1.test.		30	IN	A	10.7.19.44
+
+;; Query time: 13 msec
+;; SERVER: 10.7.15.3#53(10.7.15.3)
+;; WHEN: Mon Nov 23 00:43:29 IST 2026
+;; MSG SIZE  rcvd: 59
+
+;; Got answer:
+;; ->>HEADER<<- opcode: QUERY, status: REFUSED, id: 50079
+;; flags: qr rd ra; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version: 0, flags:; udp: 1232
+; OPT=15: 00 0e ("..")
+;; QUESTION SECTION:
+;and.				IN	A
+
+;; Query time: 8 msec
+;; SERVER: 10.7.15.3#53(10.7.15.3)
+;; WHEN: Mon Nov 23 00:43:29 IST 2026
+;; MSG SIZE  rcvd: 38
+
+;; Got answer:
+;; ->>HEADER<<- opcode: QUERY, status: REFUSED, id: 19191
+;; flags: qr rd ra; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version: 0, flags:; udp: 1232
+; OPT=15: 00 0e ("..")
+;; QUESTION SECTION:
+;dig.				IN	A
+
+;; Query time: 8 msec
+;; SERVER: 10.7.15.3#53(10.7.15.3)
+;; WHEN: Mon Nov 23 00:43:29 IST 2026
+;; MSG SIZE  rcvd: 38
+
+;; Got answer:
+;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 19393
+;; flags: qr aa rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version: 0, flags:; udp: 1232
+;; QUESTION SECTION:
+;api.team1.test.			IN	A
+
+;; ANSWER SECTION:
+api.team1.test.		30	IN	A	10.7.19.44
+
+;; Query time: 8 msec
+;; SERVER: 10.7.15.3#53(10.7.15.3)
+;; WHEN: Mon Nov 23 00:43:29 IST 2026
+;; MSG SIZE  rcvd: 59
+
+[1m[7m%[27m[1m[0m                                                                                                                     ]7;file://Tanishs-MacBook-Air.local/Users/tanish/desktop/mac4-backend-b]2;tanish@Tanishs-MacBook-Air]1;..ac4-backend-b]7;file://Tanishs-MacBook-Air.local/Users/tanish/desktop/mac4-backend-b\[0m[27m[24m[J[01;32m➜  [36mmac4-backend-b[00m [K[?1h=[?2004h[7mcat /etc/resolver/team1.test and dscacheutil -q host -a name app.team1.test[27m[75D[27mc[27ma[27mt[27m [27m/[27me[27mt[27mc[27m/[27mr[27me[27ms[27mo[27ml[27mv[27me[27mr[27m/[27mt[27me[27ma[27mm[27m1[27m.[27mt[27me[27ms[27mt[27m [27ma[27mn[27md[27m [27md[27ms[27mc[27ma[27mc[27mh[27me[27mu[27mt[27mi[27ml[27m [27m-[27mq[27m [27mh[27mo[27ms[27mt[27m [27m-[27ma[27m [27mn[27ma[27mm[27me[27m [27ma[27mp[27mp[27m.[27mt[27me[27ma[27mm[27m1[27m.[27mt[27me[27ms[27mt[?1l>[?2004l
+]2;cat /etc/resolver/team1.test and dscacheutil -q host -a name app.team1.test]1;catnameserver 10.7.15.3
+nameserver 10.7.10.8
+cat: and: No such file or directory
+cat: dscacheutil: No such file or directory
+cat: -q: No such file or directory
+cat: host: No such file or directory
+cat: -a: No such file or directory
+cat: name: No such file or directory
+cat: app.team1.test: No such file or directory
+[1m[7m%[27m[1m[0m                                                                                                                     ]7;file://Tanishs-MacBook-Air.local/Users/tanish/desktop/mac4-backend-b]2;tanish@Tanishs-MacBook-Air]1;..ac4-backend-b]7;file://Tanishs-MacBook-Air.local/Users/tanish/desktop/mac4-backend-b\[0m[27m[24m[J[01;31m➜  [36mmac4-backend-b[00m [K[?1h=[?2004hcat /etc/resolver/team1.test and dscacheutil -q host -a name app.team1.test[75Ddig @"$M1"[50P[15C and dig @"$M1" api.team1.test                    [20D[55Dbash lab inventory                                     [37D              b  

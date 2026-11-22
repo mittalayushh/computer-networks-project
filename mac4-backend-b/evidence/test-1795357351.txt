@@ -1,0 +1,190 @@
+
+; <<>> DiG 9.10.6 <<>> @10.7.15.3 app.team1.test
+; (1 server found)
+;; global options: +cmd
+;; Got answer:
+;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 49050
+;; flags: qr aa rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version: 0, flags:; udp: 1232
+;; QUESTION SECTION:
+;app.team1.test.			IN	A
+
+;; ANSWER SECTION:
+app.team1.test.		30	IN	A	10.7.19.44
+
+;; Query time: 241 msec
+;; SERVER: 10.7.15.3#53(10.7.15.3)
+;; WHEN: Sun Nov 22 19:52:32 IST 2026
+;; MSG SIZE  rcvd: 59
+
+
+; <<>> DiG 9.10.6 <<>> @10.7.15.3 api.team1.test
+; (1 server found)
+;; global options: +cmd
+;; Got answer:
+;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 28347
+;; flags: qr aa rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version: 0, flags:; udp: 1232
+;; QUESTION SECTION:
+;api.team1.test.			IN	A
+
+;; ANSWER SECTION:
+api.team1.test.		30	IN	A	10.7.19.44
+
+;; Query time: 23 msec
+;; SERVER: 10.7.15.3#53(10.7.15.3)
+;; WHEN: Sun Nov 22 19:52:32 IST 2026
+;; MSG SIZE  rcvd: 59
+
+name: app.team1.test
+ip_address: 10.7.19.44
+
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0* Host app.team1.test:8443 was resolved.
+* IPv6: (none)
+* IPv4: 10.7.19.44
+*   Trying 10.7.19.44:8443...
+* Connected to app.team1.test (10.7.19.44) port 8443
+* ALPN: curl offers http/1.1
+* (304) (OUT), TLS handshake, Client hello (1):
+} [316 bytes data]
+*  CAfile: /etc/ssl/cert.pem
+*  CApath: none
+  0     0    0     0    0     0      0      0 --:--:--  0:00:01 --:--:--     0  0     0    0     0    0     0      0      0 --:--:--  0:00:02 --:--:--     0  0     0    0     0    0     0      0      0 --:--:--  0:00:03 --:--:--     0* (304) (IN), TLS handshake, Server hello (2):
+{ [106 bytes data]
+* TLSv1.2 (IN), TLS handshake, Certificate (11):
+{ [867 bytes data]
+* TLSv1.2 (IN), TLS handshake, Server key exchange (12):
+{ [300 bytes data]
+* TLSv1.2 (IN), TLS handshake, Server finished (14):
+{ [4 bytes data]
+* TLSv1.2 (OUT), TLS handshake, Client key exchange (16):
+} [37 bytes data]
+* TLSv1.2 (OUT), TLS change cipher, Change cipher spec (1):
+} [1 bytes data]
+* TLSv1.2 (OUT), TLS handshake, Finished (20):
+} [16 bytes data]
+  0     0    0     0    0     0      0      0 --:--:--  0:00:03 --:--:--     0* TLSv1.2 (IN), TLS change cipher, Change cipher spec (1):
+{ [1 bytes data]
+* TLSv1.2 (IN), TLS handshake, Finished (20):
+{ [16 bytes data]
+* SSL connection using TLSv1.2 / ECDHE-RSA-CHACHA20-POLY1305 / [blank] / UNDEF
+* ALPN: server accepted http/1.1
+* Server certificate:
+*  subject: CN=app.team1.test
+*  start date: Nov 22 14:16:07 2026 GMT
+*  expire date: May 21 14:16:07 2027 GMT
+*  subjectAltName: host "app.team1.test" matched cert's "app.team1.test"
+*  issuer: CN=app.team1.test
+*  SSL certificate verify ok.
+* using HTTP/1.x
+> GET / HTTP/1.1
+> Host: app.team1.test:8443
+> User-Agent: curl/8.7.1
+> Accept: */*
+> 
+* Request completely sent off
+  0     0    0     0    0     0      0      0 --:--:--  0:00:04 --:--:--     0  0     0    0     0    0     0      0      0 --:--:--  0:00:05 --:--:--     0  0     0    0     0    0     0      0      0 --:--:--  0:00:06 --:--:--     0  0     0    0     0    0     0      0      0 --:--:--  0:00:07 --:--:--     0  0     0    0     0    0     0      0      0 --:--:--  0:00:08 --:--:--     0  0     0    0     0    0     0      0      0 --:--:--  0:00:09 --:--:--     0  0     0    0     0    0     0      0      0 --:--:--  0:00:10 --:--:--     0< HTTP/1.1 200 OK
+< Server: nginx/1.31.9
+< Date: Sun, 22 Nov 2026 14:22:43 GMT
+< Content-Type: application/json
+< Content-Length: 32
+< Connection: keep-alive
+< Cache-Control: no-store
+< X-Backend: A
+< X-Edge: Mac2
+< 
+{ [32 bytes data]
+100    32  100    32    0     0      2      0  0:00:16  0:00:10  0:00:06     7
+* Connection #0 to host app.team1.test left intact
+{"backend": "A", "status": "ok"}HTTP/1.1 200 OK
+Server: nginx/1.31.9
+Date: Sun, 22 Nov 2026 14:22:43 GMT
+Content-Type: application/json
+Content-Length: 32
+Connection: keep-alive
+Cache-Control: no-store
+X-Backend: B
+X-Edge: Mac2
+
+{"backend": "B", "status": "ok"}
+HTTP/1.1 200 OK
+Server: nginx/1.31.9
+Date: Sun, 22 Nov 2026 14:22:44 GMT
+Content-Type: application/json
+Content-Length: 32
+Connection: keep-alive
+Cache-Control: no-store
+X-Backend: A
+X-Edge: Mac2
+
+{"backend": "A", "status": "ok"}
+HTTP/1.1 200 OK
+Server: nginx/1.31.9
+Date: Sun, 22 Nov 2026 14:22:44 GMT
+Content-Type: application/json
+Content-Length: 32
+Connection: keep-alive
+Cache-Control: no-store
+X-Backend: B
+X-Edge: Mac2
+
+{"backend": "B", "status": "ok"}
+HTTP/1.1 200 OK
+Server: nginx/1.31.9
+Date: Sun, 22 Nov 2026 14:22:44 GMT
+Content-Type: application/json
+Content-Length: 32
+Connection: keep-alive
+Cache-Control: no-store
+X-Backend: A
+X-Edge: Mac2
+
+{"backend": "A", "status": "ok"}
+HTTP/1.1 200 OK
+Server: nginx/1.31.9
+Date: Sun, 22 Nov 2026 14:22:44 GMT
+Content-Type: application/json
+Content-Length: 32
+Connection: keep-alive
+Cache-Control: no-store
+X-Backend: B
+X-Edge: Mac2
+
+{"backend": "B", "status": "ok"}
+HTTP/1.1 200 OK
+Server: nginx/1.31.9
+Date: Sun, 22 Nov 2026 14:22:45 GMT
+Content-Type: application/json
+Content-Length: 32
+Connection: keep-alive
+Cache-Control: no-store
+X-Backend: A
+X-Edge: Mac2
+
+{"backend": "A", "status": "ok"}
+HTTP/1.1 200 OK
+Server: nginx/1.31.9
+Date: Sun, 22 Nov 2026 14:22:45 GMT
+Content-Type: text/plain
+Content-Length: 49
+Connection: keep-alive
+Cache-Control: max-age=60
+ETag: "team1-cache-v1"
+X-Backend: B
+X-Edge: Mac2
+
+HTTP/1.1 304 Not Modified
+Server: nginx/1.31.9
+Date: Sun, 22 Nov 2026 14:22:45 GMT
+Connection: keep-alive
+ETag: "team1-cache-v1"
+Cache-Control: max-age=60
+X-Backend: A
+X-Edge: Mac2
+

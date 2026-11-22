@@ -1,0 +1,11 @@
+Mon Nov 23 01:39:40 IST 2026
+Tanishs-MacBook-Air.local
+make start
+nginx: the configuration file /Users/tanish/desktop/mac4-backend-b/run/nginx.conf syntax is ok
+nginx: configuration file /Users/tanish/desktop/mac4-backend-b/run/nginx.conf test is successful
+nginx: [emerg] bind() to 0.0.0.0:8443 failed (48: Address already in use)
+nginx: [emerg] bind() to 0.0.0.0:8443 failed (48: Address already in use)
+nginx: [emerg] bind() to 0.0.0.0:8443 failed (48: Address already in use)
+nginx: [emerg] bind() to 0.0.0.0:8443 failed (48: Address already in use)
+nginx: [emerg] bind() to 0.0.0.0:8443 failed (48: Address already in use)
+nginx: [emerg] still could not bind()

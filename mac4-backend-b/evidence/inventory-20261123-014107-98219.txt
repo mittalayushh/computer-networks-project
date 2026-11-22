@@ -1,0 +1,48 @@
+Mon Nov 23 01:41:07 IST 2026
+Tanishs-MacBook-Air.local
+make inventory
+Tanishs-MacBook-Air.local
+en0: flags=8863<UP,BROADCAST,SMART,RUNNING,SIMPLEX,MULTICAST> mtu 1500
+	options=6460<TSO4,TSO6,CHANNEL_IO,PARTIAL_CSUM,ZEROINVERT_CSUM>
+	ether d0:88:0c:b4:b1:07
+	inet6 fe80::14b3:707c:132:a0d3%en0 prefixlen 64 secured scopeid 0xb 
+	inet 10.7.10.8 netmask 0xffffe000 broadcast 10.7.31.255
+	nd6 options=201<PERFORMNUD,DAD>
+	media: autoselect
+	status: active
+   route to: default
+destination: default
+       mask: default
+    gateway: 10.7.0.1
+  interface: en0
+      flags: <UP,GATEWAY,DONE,STATIC,PRCLONING,GLOBAL>
+ recvpipe  sendpipe  ssthresh  rtt,msec    rttvar  hopcount      mtu     expire
+       0         0         0         0         0         0      1500         0 
+PING 10.7.15.3 (10.7.15.3): 56 data bytes
+64 bytes from 10.7.15.3: icmp_seq=0 ttl=64 time=6.428 ms
+64 bytes from 10.7.15.3: icmp_seq=1 ttl=64 time=7.711 ms
+
+--- 10.7.15.3 ping statistics ---
+2 packets transmitted, 2 packets received, 0.0% packet loss
+round-trip min/avg/max/stddev = 6.428/7.069/7.711/0.642 ms
+PING 10.7.19.44 (10.7.19.44): 56 data bytes
+64 bytes from 10.7.19.44: icmp_seq=0 ttl=64 time=82.562 ms
+64 bytes from 10.7.19.44: icmp_seq=1 ttl=64 time=105.739 ms
+
+--- 10.7.19.44 ping statistics ---
+2 packets transmitted, 2 packets received, 0.0% packet loss
+round-trip min/avg/max/stddev = 82.562/94.150/105.739/11.589 ms
+PING 10.7.8.159 (10.7.8.159): 56 data bytes
+64 bytes from 10.7.8.159: icmp_seq=0 ttl=64 time=93.356 ms
+64 bytes from 10.7.8.159: icmp_seq=1 ttl=64 time=111.759 ms
+
+--- 10.7.8.159 ping statistics ---
+2 packets transmitted, 2 packets received, 0.0% packet loss
+round-trip min/avg/max/stddev = 93.356/102.558/111.759/9.201 ms
+PING 10.7.10.8 (10.7.10.8): 56 data bytes
+64 bytes from 10.7.10.8: icmp_seq=0 ttl=64 time=0.178 ms
+64 bytes from 10.7.10.8: icmp_seq=1 ttl=64 time=0.353 ms
+
+--- 10.7.10.8 ping statistics ---
+2 packets transmitted, 2 packets received, 0.0% packet loss
+round-trip min/avg/max/stddev = 0.178/0.265/0.353/0.088 ms

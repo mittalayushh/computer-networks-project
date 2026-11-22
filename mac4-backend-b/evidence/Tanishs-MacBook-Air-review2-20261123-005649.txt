@@ -1,0 +1,63 @@
+Script started on Mon Nov 23 00:56:49 2026
+[1m[7m%[27m[1m[0m                                                                                                                     ]7;file://Tanishs-MacBook-Air.local/Users/tanish/Desktop/mac4-backend-b]2;tanish@Tanishs-MacBook-Air]1;..ac4-backend-b]7;file://Tanishs-MacBook-Air.local/Users/tanish/Desktop/mac4-backend-b\[0m[27m[24m[J[01;32m➜  [36mmac4-backend-b[00m [K[?1h=[?2004h[7mdate[27m
+[7mhostname[27m[K
+[7msource run/lan[27m[K
+[7mprintf 'Mac1=%s  Mac2=%s  Mac3=%s  Mac4=%s\n' "$M1" "$M2" "$M3" "$M4"[27m[K
+[7mroute -n get default[27m[K[4A[27md[27ma[27mt[27me[1B[27mh[27mo[27ms[27mt[27mn[27ma[27mm[27me[1B[27ms[27mo[27mu[27mr[27mc[27me[27m [27mr[27mu[27mn[27m/[27ml[27ma[27mn[1B[27mp[27mr[27mi[27mn[27mt[27mf[27m [27m'[27mM[27ma[27mc[27m1[27m=[27m%[27ms[27m [27m [27mM[27ma[27mc[27m2[27m=[27m%[27ms[27m [27m [27mM[27ma[27mc[27m3[27m=[27m%[27ms[27m [27m [27mM[27ma[27mc[27m4[27m=[27m%[27ms[27m\[27mn[27m'[27m [27m"[27m$[27mM[27m1[27m"[27m [27m"[27m$[27mM[27m2[27m"[27m [27m"[27m$[27mM[27m3[27m"[27m [27m"[27m$[27mM[27m4[27m"[1B[27mr[27mo[27mu[27mt[27me[27m [27m-[27mn[27m [27mg[27me[27mt[27m [27md[27me[27mf[27ma[27mu[27ml[27mt[?1l>[?2004l
+]2;date; hostname; source run/lan; printf 'Mac1=%s  Mac2=%s  Mac3=%s  Mac4=%s\n']1;dateMon Nov 23 00:56:54 IST 2026
+Tanishs-MacBook-Air.local
+Mac1=10.7.15.3  Mac2=10.7.19.44  Mac3=10.7.8.159  Mac4=10.7.10.8
+   route to: default
+destination: default
+       mask: default
+    gateway: 10.7.0.1
+  interface: en0
+      flags: <UP,GATEWAY,DONE,STATIC,PRCLONING,GLOBAL>
+ recvpipe  sendpipe  ssthresh  rtt,msec    rttvar  hopcount      mtu     expire
+       0         0         0         0         0         0      1500         0 
+[1m[7m%[27m[1m[0m                                                                                                                     ]7;file://Tanishs-MacBook-Air.local/Users/tanish/Desktop/mac4-backend-b]2;tanish@Tanishs-MacBook-Air]1;..ac4-backend-b]7;file://Tanishs-MacBook-Air.local/Users/tanish/Desktop/mac4-backend-b\[0m[27m[24m[J[01;32m➜  [36mmac4-backend-b[00m [K[?1h=[?2004h[7mifconfig en0[27m
+[7mipconfig getifaddr en0[27m[K[A[27mi[27mf[27mc[27mo[27mn[27mf[27mi[27mg[27m [27me[27mn[27m0[1B[27mi[27mp[27mc[27mo[27mn[27mf[27mi[27mg[27m [27mg[27me[27mt[27mi[27mf[27ma[27md[27md[27mr[27m [27me[27mn[27m0[?1l>[?2004l
+]2;ifconfig en0; ipconfig getifaddr en0]1;ifconfigen0: flags=8863<UP,BROADCAST,SMART,RUNNING,SIMPLEX,MULTICAST> mtu 1500
+	options=6460<TSO4,TSO6,CHANNEL_IO,PARTIAL_CSUM,ZEROINVERT_CSUM>
+	ether d0:88:0c:b4:b1:07
+	inet6 fe80::14b3:707c:132:a0d3%en0 prefixlen 64 secured scopeid 0xb 
+	inet 10.7.10.8 netmask 0xffffe000 broadcast 10.7.31.255
+	nd6 options=201<PERFORMNUD,DAD>
+	media: autoselect
+	status: active
+10.7.10.8
+[1m[7m%[27m[1m[0m                                                                                                                     ]7;file://Tanishs-MacBook-Air.local/Users/tanish/Desktop/mac4-backend-b]2;tanish@Tanishs-MacBook-Air]1;..ac4-backend-b]7;file://Tanishs-MacBook-Air.local/Users/tanish/Desktop/mac4-backend-b\[0m[27m[24m[J[01;32m➜  [36mmac4-backend-b[00m [K[?1h=[?2004h[7msudo lsof -nP -iTCP -sTCP:LISTEN[27m
+[7msudo lsof -nP -iUDP:53[27m[K[A[27ms[27mu[27md[27mo[27m [27ml[27ms[27mo[27mf[27m [27m-[27mn[27mP[27m [27m-[27mi[27mT[27mC[27mP[27m [27m-[27ms[27mT[27mC[27mP[27m:[27mL[27mI[27mS[27mT[27mE[27mN[1B[27ms[27mu[27md[27mo[27m [27ml[27ms[27mo[27mf[27m [27m-[27mn[27mP[27m [27m-[27mi[27mU[27mD[27mP[27m:[27m5[27m3[?1l>[?2004l
+]2;sudo lsof -nP -iTCP -sTCP:LISTEN; sudo lsof -nP -iUDP:53]1;lsofPassword:
+COMMAND     PID   USER   FD   TYPE             DEVICE SIZE/OFF NODE NAME
+rapportd    776 tanish   15u  IPv4 0xba936c62d072f067      0t0  TCP *:55034 (LISTEN)
+rapportd    776 tanish   16u  IPv6 0x5a3303c2e1d831e5      0t0  TCP *:55034 (LISTEN)
+rapportd    776 tanish   19u  IPv6 0x36dc69b395e4ce13      0t0  TCP *:60943 (LISTEN)
+rapportd    776 tanish   21u  IPv6 0x8a36033368369781      0t0  TCP *:60944 (LISTEN)
+mysqld      885 _mysql   19u  IPv6 0xc9ac38865d9e1d48      0t0  TCP *:33060 (LISTEN)
+mysqld      885 _mysql   21u  IPv6 0x88ec77125bd9d8aa      0t0  TCP *:3306 (LISTEN)
+ControlCe  1209 tanish    9u  IPv4 0x58764364016f7ecd      0t0  TCP *:7000 (LISTEN)
+ControlCe  1209 tanish   10u  IPv6 0x668f76557e61d84d      0t0  TCP *:7000 (LISTEN)
+ControlCe  1209 tanish   11u  IPv4 0xec338944ad86cedf      0t0  TCP *:5000 (LISTEN)
+ControlCe  1209 tanish   12u  IPv6 0x338a584b4df9c300      0t0  TCP *:5000 (LISTEN)
+dnsmasq   26873 nobody    5u  IPv4 0xe2c3ea1e50214f2a      0t0  TCP 10.7.10.8:53 (LISTEN)
+COMMAND   PID   USER   FD   TYPE             DEVICE SIZE/OFF NODE NAME
+dnsmasq 26873 nobody    4u  IPv4 0x84ea91da51491a24      0t0  UDP 10.7.10.8:53
+[1m[7m%[27m[1m[0m                                                                                                                     ]7;file://Tanishs-MacBook-Air.local/Users/tanish/Desktop/mac4-backend-b]2;tanish@Tanishs-MacBook-Air]1;..ac4-backend-b]7;file://Tanishs-MacBook-Air.local/Users/tanish/Desktop/mac4-backend-b\[0m[27m[24m[J[01;32m➜  [36mmac4-backend-b[00m [K[?1h=[?2004hccat run/dns.conf[?1l>[?2004l
+]2;cat run/dns.conf]1;catport=53
+listen-address=10.7.10.8
+bind-interfaces
+no-resolv
+no-hosts
+local=/team1.test/
+host-record=app.team1.test,10.7.19.44,30
+host-record=api.team1.test,10.7.19.44,30
+[1m[7m%[27m[1m[0m                                                                                                                     ]7;file://Tanishs-MacBook-Air.local/Users/tanish/Desktop/mac4-backend-b]2;tanish@Tanishs-MacBook-Air]1;..ac4-backend-b]7;file://Tanishs-MacBook-Air.local/Users/tanish/Desktop/mac4-backend-b\[0m[27m[24m[J[01;32m➜  [36mmac4-backend-b[00m [K[?1h=[?2004h[7mcp run/dns.conf run/dns-primary.review.conf[27m[43D[27mc[27mp[27m [27mr[27mu[27mn[27m/[27md[27mn[27ms[27m.[27mc[27mo[27mn[27mf[27m [27mr[27mu[27mn[27m/[27md[27mn[27ms[27m-[27mp[27mr[27mi[27mm[27ma[27mr[27my[27m.[27mr[27me[27mv[27mi[27me[27mw[27m.[27mc[27mo[27mn[27mf[?1l>[?2004l
+]2;cp run/dns.conf run/dns-primary.review.conf]1;cp[1m[7m%[27m[1m[0m                                                                                                                     ]7;file://Tanishs-MacBook-Air.local/Users/tanish/Desktop/mac4-backend-b]2;tanish@Tanishs-MacBook-Air]1;..ac4-backend-b]7;file://Tanishs-MacBook-Air.local/Users/tanish/Desktop/mac4-backend-b\[0m[27m[24m[J[01;32m➜  [36mmac4-backend-b[00m [K[?1h=[?2004heevidence/[?1l>[?2004l
+]2;evidence/]1;evidence/[1m[7m%[27m[1m[0m                                                                                                                     ]7;file://Tanishs-MacBook-Air.local/Users/tanish/Desktop/mac4-backend-b/evidence]2;tanish@Tanishs-MacBook-Air]1;..nd-b/evidence]7;file://Tanishs-MacBook-Air.local/Users/tanish/Desktop/mac4-backend-b/evidence\[0m[27m[24m[J[01;32m➜  [36mevidence[00m [K[?1h=[?2004hllΩß[?1l>[?2004l
+]2;lΩß]1;lΩßzsh: command not found: lΩß
+[1m[7m%[27m[1m[0m                                                                                                                     ]7;file://Tanishs-MacBook-Air.local/Users/tanish/Desktop/mac4-backend-b/evidence]2;tanish@Tanishs-MacBook-Air]1;..nd-b/evidence]7;file://Tanishs-MacBook-Air.local/Users/tanish/Desktop/mac4-backend-b/evidence\[0m[27m[24m[J[01;31m➜  [36mevidence[00m [K[?1h=[?2004hlls[?1l>[?2004l
+]2;eza --icons=always]1;ls inventory.txt                                       Tanishs-MacBook-Air-review2-20261123-005649.txt
+ Tanishs-MacBook-Air-rehearsal-20261123-003946.txt   test-1795357351.txt
+ Tanishs-MacBook-Air-rehearsal-20261123-004208.txt
+[1m[7m%[27m[1m[0m                                                                                                                     ]7;file://Tanishs-MacBook-Air.local/Users/tanish/Desktop/mac4-backend-b/evidence]2;tanish@Tanishs-MacBook-Air]1;..nd-b/evidence]7;file://Tanishs-MacBook-Air.local/Users/tanish/Desktop/mac4-backend-b/evidence\[0m[27m[24m[J[01;32m➜  [36mevidence[00m [K[?1h=[?2004h

@@ -1,0 +1,48 @@
+Mon Nov 23 01:58:51 IST 2026
+Tanishs-MacBook-Air.local
+make lookup
+
+; <<>> DiG 9.10.6 <<>> +tries=1 +time=2 @10.7.15.3 app.team1.test
+; (1 server found)
+;; global options: +cmd
+;; Got answer:
+;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 2868
+;; flags: qr aa rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version: 0, flags:; udp: 1232
+;; QUESTION SECTION:
+;app.team1.test.			IN	A
+
+;; ANSWER SECTION:
+app.team1.test.		30	IN	A	10.7.10.8
+
+;; Query time: 37 msec
+;; SERVER: 10.7.15.3#53(10.7.15.3)
+;; WHEN: Mon Nov 23 01:58:51 IST 2026
+;; MSG SIZE  rcvd: 59
+
+
+; <<>> DiG 9.10.6 <<>> +tries=1 +time=2 @10.7.10.8 app.team1.test
+; (1 server found)
+;; global options: +cmd
+;; Got answer:
+;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 62559
+;; flags: qr aa rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version: 0, flags:; udp: 1232
+;; QUESTION SECTION:
+;app.team1.test.			IN	A
+
+;; ANSWER SECTION:
+app.team1.test.		30	IN	A	10.7.19.44
+
+;; Query time: 0 msec
+;; SERVER: 10.7.10.8#53(10.7.10.8)
+;; WHEN: Mon Nov 23 01:58:51 IST 2026
+;; MSG SIZE  rcvd: 59
+
+name: app.team1.test
+ip_address: 10.7.10.8
+

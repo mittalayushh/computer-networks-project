@@ -1,0 +1,5 @@
+Mon Nov 23 02:00:51 IST 2026
+Tanishs-MacBook-Air.local
+make dns-primary
+
+dnsmasq: failed to create listening socket for 10.7.10.8: Address already in use
