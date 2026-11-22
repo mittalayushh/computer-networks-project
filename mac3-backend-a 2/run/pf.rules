@@ -1,0 +1,2 @@
+pass in quick on en0 inet proto tcp from 10.7.19.44 to any port 3001
+block return in quick on en0 inet proto tcp to any port 3001
