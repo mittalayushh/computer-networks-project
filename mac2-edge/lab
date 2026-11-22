@@ -45,5 +45,13 @@ host-record=app.team1.test,$target,30
 host-record=api.team1.test,$target,30
 CFG
   exec sudo "$(brew --prefix dnsmasq)/sbin/dnsmasq" --keep-in-foreground --conf-file="$PWD/run/dns.conf" ;;
+ cert)
+  case $role in 2|4);; *) exit 2;; esac
+  umask 077
+  [[ ! -e run/edge.key && ! -e edge-$role.crt ]] || { echo 'Certificate already generated. Keep existing pair.'; exit 1; }
+  "$(brew --prefix openssl@3)/bin/openssl" req -new -newkey rsa:2048 -nodes -x509 -days 180 -sha256 -keyout run/edge.key -out edge-$role.crt -subj "/CN=app.team1.test" -addext "subjectAltName=DNS:app.team1.test,DNS:api.team1.test" -addext "extendedKeyUsage=serverAuth" ;;
+ trust)
+  case ${2:-} in edge-2.crt|edge-4.crt);; *) exit 2;; esac
+  sudo security add-trusted-cert -d -r trustRoot -p ssl -k /Library/Keychains/System.keychain "$2" ;;
  *) echo 'See RUNBOOK.md'; exit 2;;
 esac
