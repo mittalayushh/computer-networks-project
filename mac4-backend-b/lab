@@ -1,0 +1,126 @@
+#!/bin/bash
+set -eu
+cd "$(dirname "$0")"
+role=$(cat ROLE)
+mkdir -p run evidence
+if [[ ${1:-} == setup ]]; then
+  command -v brew >/dev/null || { echo 'Install Homebrew and enable brew in PATH first.'; exit 1; }
+  brew install python
+  case $role in 1|4) brew install dnsmasq;; esac
+  case $role in 2|4) brew install nginx openssl@3;; esac
+  python3 - <<'PY'
+import ipaddress
+from pathlib import Path
+ips = []
+with open('/dev/tty') as tty:
+    for i in range(1,5):
+        print(f'Mac {i} LAN IPv4: ',end='',flush=True)
+        ip = str(ipaddress.IPv4Address(tty.readline().strip()))
+        if ip in ips: raise SystemExit('Each Mac needs its own address')
+        ips.append(ip)
+Path('run/lan').write_text(''.join(f'M{i}={ip}\n' for i,ip in enumerate(ips,1)))
+PY
+  exit
+fi
+source run/lan
+iface=$(route -n get default | awk '/interface:/{print $2}')
+url=https://app.team1.test:8443
+case ${1:-} in
+ inventory)
+  { hostname; ifconfig "$iface"; route -n get default; for ip in "$M1" "$M2" "$M3" "$M4"; do ping -c 2 "$ip"; done; } 2>&1 | tee evidence/inventory.txt ;;
+ backend)
+  case $role in 3) export BACKEND=A PORT=3001;; 4) export BACKEND=B PORT=3002;; *) exit 2;; esac
+  exec python3 backend.py ;;
+ dns)
+  case $role in 1) bind=$M1;; 4) bind=$M4;; *) exit 2;; esac
+  case ${2:-primary} in primary) target=$M2;; standby) target=$M4;; wrong) target=$M3;; *) exit 2;; esac
+  cat > run/dns.conf <<CFG
+port=53
+listen-address=$bind
+bind-interfaces
+no-resolv
+no-hosts
+local=/team1.test/
+host-record=app.team1.test,$target,30
+host-record=api.team1.test,$target,30
+CFG
+  exec sudo "$(brew --prefix dnsmasq)/sbin/dnsmasq" --keep-in-foreground --conf-file="$PWD/run/dns.conf" ;;
+ cert)
+  case $role in 2|4);; *) exit 2;; esac
+  umask 077
+  [[ ! -e run/edge.key && ! -e edge-$role.crt ]] || { echo 'Certificate already generated. Keep existing pair.'; exit 1; }
+  "$(brew --prefix openssl@3)/bin/openssl" req -new -newkey rsa:2048 -nodes -x509 -days 180 -sha256 -keyout run/edge.key -out edge-$role.crt -subj "/CN=app.team1.test" -addext "subjectAltName=DNS:app.team1.test,DNS:api.team1.test" -addext "extendedKeyUsage=serverAuth" ;;
+ trust)
+  case ${2:-} in edge-2.crt|edge-4.crt);; *) exit 2;; esac
+  sudo security add-trusted-cert -d -r trustRoot -p ssl -k /Library/Keychains/System.keychain "$2" ;;
+ edge)
+  case $role in 2|4);; *) exit 2;; esac
+  cat > run/nginx.conf <<CFG
+worker_processes 1;
+pid "$PWD/run/nginx.pid";
+error_log "$PWD/run/error.log";
+events { worker_connections 128; }
+http {
+ access_log "$PWD/run/access.log";
+ upstream pool {
+  server $M3:3001 max_fails=1 fail_timeout=5s;
+  server $M4:3002 max_fails=1 fail_timeout=5s;
+ }
+ server {
+  listen 8443 ssl;
+  server_name app.team1.test api.team1.test;
+  ssl_certificate "$PWD/edge-$role.crt";
+  ssl_certificate_key "$PWD/run/edge.key";
+  ssl_protocols TLSv1.2;
+  add_header X-Edge Mac$role always;
+  location / {
+   proxy_pass http://pool;
+   proxy_http_version 1.1;
+   proxy_set_header Host \$host;
+   proxy_connect_timeout 2s;
+   proxy_next_upstream error timeout;
+   proxy_next_upstream_tries 2;
+  }
+ }
+}
+CFG
+  nginx -t -c "$PWD/run/nginx.conf"
+  exec nginx -c "$PWD/run/nginx.conf" -g 'daemon off;' ;;
+ resolver)
+  sudo mkdir -p /etc/resolver
+  [[ ! -e /etc/resolver/team1.test || -f run/resolver-owned ]] || { echo 'Existing team1.test resolver: preserve it and configure manually.'; exit 1; }
+  case ${2:-one} in one) printf 'nameserver %s\n' "$M1";; two) printf 'nameserver %s\nnameserver %s\n' "$M1" "$M4";; wrong) printf 'nameserver %s\n' "$M3";; *) exit 2;; esac > run/resolver
+  touch run/resolver-owned
+  sudo install -m 644 run/resolver /etc/resolver/team1.test
+  bash lab flush ;;
+ flush) sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder ;;
+ capture) exec sudo tcpdump -i "$iface" -s0 -w "evidence/flow-$(date +%s).pcap" '(udp port 53 or tcp port 8443)' ;;
+ test)
+  set -o pipefail
+  { dig @"$M1" app.team1.test; dig @"$M1" api.team1.test; dscacheutil -q host -a name app.team1.test
+    /usr/bin/curl -fv --http1.1 "$url/"
+    for i in {1..6}; do /usr/bin/curl -fsS -i "$url/api/status"; echo; done
+    /usr/bin/curl -fsSI "$url/cache-demo"
+    /usr/bin/curl -sSi -H 'If-None-Match: "team1-cache-v1"' "$url/cache-demo"
+  } 2>&1 | tee "evidence/test-$(date +%s).txt" ;;
+ isolate)
+  case $role in 3) port=3001;; 4) port=3002;; *) exit 2;; esac
+  anchor=com.apple/cn-team1
+  sudo pfctl -sr | grep -F 'anchor "com.apple/*"' >/dev/null || { echo 'Default Apple filter anchor required'; exit 1; }
+  [[ ! -e run/pf.token ]] || { echo 'Isolation already enabled'; exit 1; }
+  sudo pfctl -a "$anchor" -sr > run/pf.before
+  [[ ! -s run/pf.before ]] || { echo 'Project anchor already occupied'; exit 1; }
+  printf 'pass in quick on %s inet proto tcp from %s to any port %s\nblock return in quick on %s inet proto tcp to any port %s\n' "$iface" "$M2" "$port" "$iface" "$port" > run/pf.rules
+  sudo pfctl -n -a "$anchor" -f run/pf.rules
+  sudo pfctl -E 2>&1 | tee run/pf.enable
+  awk '/Token/{print $NF}' run/pf.enable > run/pf.token
+  test -s run/pf.token
+  sudo pfctl -a "$anchor" -f run/pf.rules ;;
+ restore)
+  test -s run/pf.token
+  sudo pfctl -a com.apple/cn-team1 -f run/pf.before
+  sudo pfctl -X "$(cat run/pf.token)"
+  rm run/pf.token ;;
+ unresolve) test -f run/resolver-owned; sudo rm -f /etc/resolver/team1.test; rm run/resolver-owned; bash lab flush ;;
+ *) echo 'See RUNBOOK.md'; exit 2;;
+esac
