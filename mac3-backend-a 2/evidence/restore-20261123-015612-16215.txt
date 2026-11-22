@@ -1,0 +1,12 @@
+Mon Nov 23 01:56:12 IST 2026
+Saumyas-MacBook-Pro-2.local
+make restore
+pfctl: Use of -f option, could result in flushing of rules
+present in the main ruleset added by the system at startup.
+See /etc/pf.conf for further details.
+
+No ALTQ support in kernel
+ALTQ related functions disabled
+No ALTQ support in kernel
+ALTQ related functions disabled
+disable request successful. 1 more pf enable reference(s) remaining, pf still enabled.

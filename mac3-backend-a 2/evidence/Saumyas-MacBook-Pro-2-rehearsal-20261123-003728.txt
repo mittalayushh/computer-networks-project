@@ -1,0 +1,881 @@
+Script started on Mon Nov 23 00:37:28 2026
+[1m[7m%[27m[1m[0m                                                                                ]7;file://Saumyas-MacBook-Pro-2.local/Users/saumyasoni/Downloads/mac3-backend-a[0m[27m[24m[Jsaumyasoni@Saumyas-MacBook-Pro-2 mac3-backend-a % [K[?2004h[7msource run/lan[27m
+[7mu=https://app.team1.test:8443[27m[K
+[7mdate[27m[K
+[7mhostname[27m[K
+[7mprintf 'Mac1 DNS=%s\nMac2 edge=%s\nMac3 A=%s\nMac4 B=%s\n' "$M1" "$M2" "$M3" "$M[7m4[7m"[27m[K[5A[48C[27ms[27mo[27mu[27mr[27mc[27me[27m [27mr[27mu[27mn[27m/[27ml[27ma[27mn[1B[27mu[27m=[27mh[27mt[27mt[27mp[27ms[27m:[27m/[27m/[27ma[27mp[27mp[27m.[27mt[27me[27ma[27mm[27m1[27m.[27mt[27me[27ms[27mt[27m:[27m8[27m4[27m4[27m3[1B[27md[27ma[27mt[27me[1B[27mh[27mo[27ms[27mt[27mn[27ma[27mm[27me[1B[27mp[27mr[27mi[27mn[27mt[27mf[27m [27m'[27mM[27ma[27mc[27m1[27m [27mD[27mN[27mS[27m=[27m%[27ms[27m\[27mn[27mM[27ma[27mc[27m2[27m [27me[27md[27mg[27me[27m=[27m%[27ms[27m\[27mn[27mM[27ma[27mc[27m3[27m [27mA[27m=[27m%[27ms[27m\[27mn[27mM[27ma[27mc[27m4[27m [27mB[27m=[27m%[27ms[27m\[27mn[27m'[27m [27m"[27m$[27mM[27m1[27m"[27m [27m"[27m$[27mM[27m2[27m"[27m [27m"[27m$[27mM[27m3[27m"[27m [27m"[27m$[27mM4[27m"[?2004l
+Mon Nov 23 00:37:40 IST 2026
+Saumyas-MacBook-Pro-2.local
+Mac1 DNS=10.7.15.3
+Mac2 edge=10.7.19.44
+Mac3 A=10.7.8.159
+Mac4 B=10.7.10.8
+[1m[7m%[27m[1m[0m                                                                                ]7;file://Saumyas-MacBook-Pro-2.local/Users/saumyasoni/Downloads/mac3-backend-a[0m[27m[24m[Jsaumyasoni@Saumyas-MacBook-Pro-2 mac3-backend-a % [K[?2004h[7mbash lab inventory[27m[18D[27mb[27ma[27ms[27mh[27m [27ml[27ma[27mb[27m [27mi[27mn[27mv[27me[27mn[27mt[27mo[27mr[27my[?2004l
+Saumyas-MacBook-Pro-2.local
+en0: flags=8863<UP,BROADCAST,SMART,RUNNING,SIMPLEX,MULTICAST> mtu 1500
+	options=6460<TSO4,TSO6,CHANNEL_IO,PARTIAL_CSUM,ZEROINVERT_CSUM>
+	ether 52:52:71:3a:7e:25
+	inet6 fe80::1c37:23e3:8474:fdd1%en0 prefixlen 64 secured scopeid 0xb 
+	inet 10.7.8.159 netmask 0xffffe000 broadcast 10.7.31.255
+	nd6 options=201<PERFORMNUD,DAD>
+	media: autoselect
+	status: active
+   route to: default
+destination: default
+       mask: default
+    gateway: 10.7.0.1
+  interface: en0
+      flags: <UP,GATEWAY,DONE,STATIC,PRCLONING,GLOBAL>
+ recvpipe  sendpipe  ssthresh  rtt,msec    rttvar  hopcount      mtu     expire
+       0         0         0         0         0         0      1500         0 
+PING 10.7.15.3 (10.7.15.3): 56 data bytes
+64 bytes from 10.7.15.3: icmp_seq=0 ttl=64 time=95.964 ms
+64 bytes from 10.7.15.3: icmp_seq=1 ttl=64 time=8.067 ms
+
+--- 10.7.15.3 ping statistics ---
+2 packets transmitted, 2 packets received, 0.0% packet loss
+round-trip min/avg/max/stddev = 8.067/52.016/95.964/43.948 ms
+PING 10.7.19.44 (10.7.19.44): 56 data bytes
+64 bytes from 10.7.19.44: icmp_seq=0 ttl=64 time=16.204 ms
+64 bytes from 10.7.19.44: icmp_seq=1 ttl=64 time=201.812 ms
+
+--- 10.7.19.44 ping statistics ---
+2 packets transmitted, 2 packets received, 0.0% packet loss
+round-trip min/avg/max/stddev = 16.204/109.008/201.812/92.804 ms
+PING 10.7.8.159 (10.7.8.159): 56 data bytes
+64 bytes from 10.7.8.159: icmp_seq=0 ttl=64 time=1.629 ms
+64 bytes from 10.7.8.159: icmp_seq=1 ttl=64 time=1.154 ms
+
+--- 10.7.8.159 ping statistics ---
+2 packets transmitted, 2 packets received, 0.0% packet loss
+round-trip min/avg/max/stddev = 1.154/1.391/1.629/0.237 ms
+PING 10.7.10.8 (10.7.10.8): 56 data bytes
+64 bytes from 10.7.10.8: icmp_seq=0 ttl=64 time=49.760 ms
+64 bytes from 10.7.10.8: icmp_seq=1 ttl=64 time=118.975 ms
+
+--- 10.7.10.8 ping statistics ---
+2 packets transmitted, 2 packets received, 0.0% packet loss
+round-trip min/avg/max/stddev = 49.760/84.367/118.975/34.608 ms
+[1m[7m%[27m[1m[0m                                                                                ]7;file://Saumyas-MacBook-Pro-2.local/Users/saumyasoni/Downloads/mac3-backend-a[0m[27m[24m[Jsaumyasoni@Saumyas-MacBook-Pro-2 mac3-backend-a % [K[?2004hcclear[?2004l
+[3J[H[2J[1m[7m%[27m[1m[0m                                                                                ]7;file://Saumyas-MacBook-Pro-2.local/Users/saumyasoni/Downloads/mac3-backend-a[0m[27m[24m[Jsaumyasoni@Saumyas-MacBook-Pro-2 mac3-backend-a % [K[?2004h[7mdig @"$M1" app.team1.test and [7md[7mig @"$M1" api.team1.test[27m[K[A[25C[27md[27mi[27mg[27m [27m@[27m"[27m$[27mM[27m1[27m"[27m [27ma[27mp[27mp[27m.[27mt[27me[27ma[27mm[27m1[27m.[27mt[27me[27ms[27mt[27m [27ma[27mn[27md[27m d[27mi[27mg[27m [27m@[27m"[27m$[27mM[27m1[27m"[27m [27ma[27mp[27mi[27m.[27mt[27me[27ma[27mm[27m1[27m.[27mt[27me[27ms[27mt[?2004l
+
+; <<>> DiG 9.10.6 <<>> @10.7.15.3 app.team1.test and dig @10.7.15.3 api.team1.test
+; (1 server found)
+;; global options: +cmd
+;; Got answer:
+;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 5455
+;; flags: qr aa rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version: 0, flags:; udp: 1232
+;; QUESTION SECTION:
+;app.team1.test.			IN	A
+
+;; ANSWER SECTION:
+app.team1.test.		30	IN	A	10.7.19.44
+
+;; Query time: 101 msec
+;; SERVER: 10.7.15.3#53(10.7.15.3)
+;; WHEN: Mon Nov 23 00:43:07 IST 2026
+;; MSG SIZE  rcvd: 59
+
+;; Got answer:
+;; ->>HEADER<<- opcode: QUERY, status: REFUSED, id: 25806
+;; flags: qr rd ra; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version: 0, flags:; udp: 1232
+; OPT=15: 00 0e ("..")
+;; QUESTION SECTION:
+;and.				IN	A
+
+;; Query time: 7 msec
+;; SERVER: 10.7.15.3#53(10.7.15.3)
+;; WHEN: Mon Nov 23 00:43:07 IST 2026
+;; MSG SIZE  rcvd: 38
+
+;; Got answer:
+;; ->>HEADER<<- opcode: QUERY, status: REFUSED, id: 15701
+;; flags: qr rd ra; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version: 0, flags:; udp: 1232
+; OPT=15: 00 0e ("..")
+;; QUESTION SECTION:
+;dig.				IN	A
+
+;; Query time: 7 msec
+;; SERVER: 10.7.15.3#53(10.7.15.3)
+;; WHEN: Mon Nov 23 00:43:07 IST 2026
+;; MSG SIZE  rcvd: 38
+
+;; Got answer:
+;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 8296
+;; flags: qr aa rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version: 0, flags:; udp: 1232
+;; QUESTION SECTION:
+;api.team1.test.			IN	A
+
+;; ANSWER SECTION:
+api.team1.test.		30	IN	A	10.7.19.44
+
+;; Query time: 6 msec
+;; SERVER: 10.7.15.3#53(10.7.15.3)
+;; WHEN: Mon Nov 23 00:43:07 IST 2026
+;; MSG SIZE  rcvd: 59
+
+[1m[7m%[27m[1m[0m                                                                                ]7;file://Saumyas-MacBook-Pro-2.local/Users/saumyasoni/Downloads/mac3-backend-a[0m[27m[24m[Jsaumyasoni@Saumyas-MacBook-Pro-2 mac3-backend-a % [K[?2004hcclear[?2004l
+[3J[H[2J[1m[7m%[27m[1m[0m                                                                                ]7;file://Saumyas-MacBook-Pro-2.local/Users/saumyasoni/Downloads/mac3-backend-a[0m[27m[24m[Jsaumyasoni@Saumyas-MacBook-Pro-2 mac3-backend-a % [K[?2004hcclear[?2004l
+[3J[H[2J[1m[7m%[27m[1m[0m                                                                                ]7;file://Saumyas-MacBook-Pro-2.local/Users/saumyasoni/Downloads/mac3-backend-a[0m[27m[24m[Jsaumyasoni@Saumyas-MacBook-Pro-2 mac3-backend-a % [K[?2004h[7mdig @"$M1" app.team1.test and [7md[7mig @"$M1" api.team1.test[27m[K[A[25C[27md[27mi[27mg[27m [27m@[27m"[27m$[27mM[27m1[27m"[27m [27ma[27mp[27mp[27m.[27mt[27me[27ma[27mm[27m1[27m.[27mt[27me[27ms[27mt[27m [27ma[27mn[27md[27m d[27mi[27mg[27m [27m@[27m"[27m$[27mM[27m1[27m"[27m [27ma[27mp[27mi[27m.[27mt[27me[27ma[27mm[27m1[27m.[27mt[27me[27ms[27mt[?2004l
+
+; <<>> DiG 9.10.6 <<>> @10.7.15.3 app.team1.test and dig @10.7.15.3 api.team1.test
+; (1 server found)
+;; global options: +cmd
+;; Got answer:
+;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 63452
+;; flags: qr aa rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version: 0, flags:; udp: 1232
+;; QUESTION SECTION:
+;app.team1.test.			IN	A
+
+;; ANSWER SECTION:
+app.team1.test.		30	IN	A	10.7.19.44
+
+;; Query time: 38 msec
+;; SERVER: 10.7.15.3#53(10.7.15.3)
+;; WHEN: Mon Nov 23 00:43:56 IST 2026
+;; MSG SIZE  rcvd: 59
+
+;; Got answer:
+;; ->>HEADER<<- opcode: QUERY, status: REFUSED, id: 62810
+;; flags: qr rd ra; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version: 0, flags:; udp: 1232
+; OPT=15: 00 0e ("..")
+;; QUESTION SECTION:
+;and.				IN	A
+
+;; Query time: 7 msec
+;; SERVER: 10.7.15.3#53(10.7.15.3)
+;; WHEN: Mon Nov 23 00:43:56 IST 2026
+;; MSG SIZE  rcvd: 38
+
+;; Got answer:
+;; ->>HEADER<<- opcode: QUERY, status: REFUSED, id: 3812
+;; flags: qr rd ra; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version: 0, flags:; udp: 1232
+; OPT=15: 00 0e ("..")
+;; QUESTION SECTION:
+;dig.				IN	A
+
+;; Query time: 7 msec
+;; SERVER: 10.7.15.3#53(10.7.15.3)
+;; WHEN: Mon Nov 23 00:43:56 IST 2026
+;; MSG SIZE  rcvd: 38
+
+;; Got answer:
+;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 61144
+;; flags: qr aa rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version: 0, flags:; udp: 1232
+;; QUESTION SECTION:
+;api.team1.test.			IN	A
+
+;; ANSWER SECTION:
+api.team1.test.		30	IN	A	10.7.19.44
+
+;; Query time: 7 msec
+;; SERVER: 10.7.15.3#53(10.7.15.3)
+;; WHEN: Mon Nov 23 00:43:56 IST 2026
+;; MSG SIZE  rcvd: 59
+
+[1m[7m%[27m[1m[0m                                                                                ]7;file://Saumyas-MacBook-Pro-2.local/Users/saumyasoni/Downloads/mac3-backend-a[0m[27m[24m[Jsaumyasoni@Saumyas-MacBook-Pro-2 mac3-backend-a % [K[?2004h[[Adig @"$M1" app.team1.test and dig @"$M1" api.team1.test[K[A[25Cclear[K[1B[K[A[55Cdig @"$M1" app.team1.test and dig @"$M1" api.team1.test[K[A[25Cclear[K[1B[K[A[55Cdig @"$M1" app.team1.test and dig @"$M1" api.team1.test[K[A[25C[A[K[1B[K[A[52Cclear[?2004l[1Bzsh: bad pattern: [Aclear
+[1m[7m%[27m[1m[0m                                                                                ]7;file://Saumyas-MacBook-Pro-2.local/Users/saumyasoni/Downloads/mac3-backend-a[0m[27m[24m[Jsaumyasoni@Saumyas-MacBook-Pro-2 mac3-backend-a % [K[?2004hcclear[?2004l
+[3J[H[2J[1m[7m%[27m[1m[0m                                                                                ]7;file://Saumyas-MacBook-Pro-2.local/Users/saumyasoni/Downloads/mac3-backend-a[0m[27m[24m[Jsaumyasoni@Saumyas-MacBook-Pro-2 mac3-backend-a % [K[?2004h[7mcat /etc/resolver/team1.test a[7mn[7md dscacheutil -q host -a name app.team1.test[27m[K[A[5C[27mc[27ma[27mt[27m [27m/[27me[27mt[27mc[27m/[27mr[27me[27ms[27mo[27ml[27mv[27me[27mr[27m/[27mt[27me[27ma[27mm[27m1[27m.[27mt[27me[27ms[27mt[27m [27man[27md[27m [27md[27ms[27mc[27ma[27mc[27mh[27me[27mu[27mt[27mi[27ml[27m [27m-[27mq[27m [27mh[27mo[27ms[27mt[27m [27m-[27ma[27m [27mn[27ma[27mm[27me[27m [27ma[27mp[27mp[27m.[27mt[27me[27ma[27mm[27m1[27m.[27mt[27me[27ms[27mt[?2004l
+nameserver 10.7.15.3
+nameserver 10.7.10.8
+cat: and: No such file or directory
+cat: dscacheutil: No such file or directory
+cat: -q: No such file or directory
+cat: host: No such file or directory
+cat: -a: No such file or directory
+cat: name: No such file or directory
+cat: app.team1.test: No such file or directory
+[1m[7m%[27m[1m[0m                                                                                ]7;file://Saumyas-MacBook-Pro-2.local/Users/saumyasoni/Downloads/mac3-backend-a[0m[27m[24m[Jsaumyasoni@Saumyas-MacBook-Pro-2 mac3-backend-a % [K[?2004hcclear[?2004l
+[3J[H[2J[1m[7m%[27m[1m[0m                                                                                ]7;file://Saumyas-MacBook-Pro-2.local/Users/saumyasoni/Downloads/mac3-backend-a[0m[27m[24m[Jsaumyasoni@Saumyas-MacBook-Pro-2 mac3-backend-a % [K[?2004h[7mbash lab test[27m[13D[27mb[27ma[27ms[27mh[27m [27ml[27ma[27mb[27m [27mt[27me[27ms[27mt[?2004l
+
+; <<>> DiG 9.10.6 <<>> @10.7.15.3 app.team1.test
+; (1 server found)
+;; global options: +cmd
+;; Got answer:
+;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 60859
+;; flags: qr aa rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version: 0, flags:; udp: 1232
+;; QUESTION SECTION:
+;app.team1.test.			IN	A
+
+;; ANSWER SECTION:
+app.team1.test.		30	IN	A	10.7.19.44
+
+;; Query time: 9 msec
+;; SERVER: 10.7.15.3#53(10.7.15.3)
+;; WHEN: Mon Nov 23 00:45:02 IST 2026
+;; MSG SIZE  rcvd: 59
+
+
+; <<>> DiG 9.10.6 <<>> @10.7.15.3 api.team1.test
+; (1 server found)
+;; global options: +cmd
+;; Got answer:
+;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 3489
+;; flags: qr aa rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version: 0, flags:; udp: 1232
+;; QUESTION SECTION:
+;api.team1.test.			IN	A
+
+;; ANSWER SECTION:
+api.team1.test.		30	IN	A	10.7.19.44
+
+;; Query time: 9 msec
+;; SERVER: 10.7.15.3#53(10.7.15.3)
+;; WHEN: Mon Nov 23 00:45:02 IST 2026
+;; MSG SIZE  rcvd: 59
+
+name: app.team1.test
+ip_address: 10.7.19.44
+
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0* Host app.team1.test:8443 was resolved.
+* IPv6: (none)
+* IPv4: 10.7.19.44
+*   Trying 10.7.19.44:8443...
+* Connected to app.team1.test (10.7.19.44) port 8443
+* ALPN: curl offers http/1.1
+* (304) (OUT), TLS handshake, Client hello (1):
+} [316 bytes data]
+*  CAfile: /etc/ssl/cert.pem
+*  CApath: none
+* (304) (IN), TLS handshake, Server hello (2):
+{ [106 bytes data]
+* TLSv1.2 (IN), TLS handshake, Certificate (11):
+{ [867 bytes data]
+* TLSv1.2 (IN), TLS handshake, Server key exchange (12):
+{ [300 bytes data]
+* TLSv1.2 (IN), TLS handshake, Server finished (14):
+{ [4 bytes data]
+* TLSv1.2 (OUT), TLS handshake, Client key exchange (16):
+} [37 bytes data]
+* TLSv1.2 (OUT), TLS change cipher, Change cipher spec (1):
+} [1 bytes data]
+* TLSv1.2 (OUT), TLS handshake, Finished (20):
+} [16 bytes data]
+* TLSv1.2 (IN), TLS change cipher, Change cipher spec (1):
+{ [1 bytes data]
+* TLSv1.2 (IN), TLS handshake, Finished (20):
+{ [16 bytes data]
+* SSL connection using TLSv1.2 / ECDHE-RSA-CHACHA20-POLY1305 / [blank] / UNDEF
+* ALPN: server accepted http/1.1
+* Server certificate:
+*  subject: CN=app.team1.test
+*  start date: Nov 22 14:16:07 2026 GMT
+*  expire date: May 21 14:16:07 2027 GMT
+*  subjectAltName: host "app.team1.test" matched cert's "app.team1.test"
+*  issuer: CN=app.team1.test
+*  SSL certificate verify ok.
+* using HTTP/1.x
+> GET / HTTP/1.1
+> Host: app.team1.test:8443
+> User-Agent: curl/8.7.1
+> Accept: */*
+> 
+* Request completely sent off
+< HTTP/1.1 200 OK
+< Server: nginx/1.31.9
+< Date: Sun, 22 Nov 2026 19:15:02 GMT
+< Content-Type: application/json
+< Content-Length: 32
+< Connection: keep-alive
+< Cache-Control: no-store
+< X-Backend: B
+< X-Edge: Mac2
+< 
+{ [32 bytes data]
+100    32  100    32    0     0    205      0 --:--:-- --:--:-- --:--:--   206
+* Connection #0 to host app.team1.test left intact
+{"backend": "B", "status": "ok"}HTTP/1.1 200 OK
+Server: nginx/1.31.9
+Date: Sun, 22 Nov 2026 19:15:04 GMT
+Content-Type: application/json
+Content-Length: 32
+Connection: keep-alive
+Cache-Control: no-store
+X-Backend: B
+X-Edge: Mac2
+
+{"backend": "B", "status": "ok"}
+HTTP/1.1 200 OK
+Server: nginx/1.31.9
+Date: Sun, 22 Nov 2026 19:15:04 GMT
+Content-Type: application/json
+Content-Length: 32
+Connection: keep-alive
+Cache-Control: no-store
+X-Backend: B
+X-Edge: Mac2
+
+{"backend": "B", "status": "ok"}
+HTTP/1.1 200 OK
+Server: nginx/1.31.9
+Date: Sun, 22 Nov 2026 19:15:04 GMT
+Content-Type: application/json
+Content-Length: 32
+Connection: keep-alive
+Cache-Control: no-store
+X-Backend: B
+X-Edge: Mac2
+
+{"backend": "B", "status": "ok"}
+HTTP/1.1 200 OK
+Server: nginx/1.31.9
+Date: Sun, 22 Nov 2026 19:15:04 GMT
+Content-Type: application/json
+Content-Length: 32
+Connection: keep-alive
+Cache-Control: no-store
+X-Backend: B
+X-Edge: Mac2
+
+{"backend": "B", "status": "ok"}
+HTTP/1.1 200 OK
+Server: nginx/1.31.9
+Date: Sun, 22 Nov 2026 19:15:04 GMT
+Content-Type: application/json
+Content-Length: 32
+Connection: keep-alive
+Cache-Control: no-store
+X-Backend: B
+X-Edge: Mac2
+
+{"backend": "B", "status": "ok"}
+HTTP/1.1 200 OK
+Server: nginx/1.31.9
+Date: Sun, 22 Nov 2026 19:15:04 GMT
+Content-Type: application/json
+Content-Length: 32
+Connection: keep-alive
+Cache-Control: no-store
+X-Backend: B
+X-Edge: Mac2
+
+{"backend": "B", "status": "ok"}
+HTTP/1.1 200 OK
+Server: nginx/1.31.9
+Date: Sun, 22 Nov 2026 19:15:04 GMT
+Content-Type: text/plain
+Content-Length: 49
+Connection: keep-alive
+Cache-Control: max-age=60
+ETag: "team1-cache-v1"
+X-Backend: B
+X-Edge: Mac2
+
+HTTP/1.1 304 Not Modified
+Server: nginx/1.31.9
+Date: Sun, 22 Nov 2026 19:15:04 GMT
+Connection: keep-alive
+ETag: "team1-cache-v1"
+Cache-Control: max-age=60
+X-Backend: B
+X-Edge: Mac2
+
+[1m[7m%[27m[1m[0m                                                                                ]7;file://Saumyas-MacBook-Pro-2.local/Users/saumyasoni/Downloads/mac3-backend-a[0m[27m[24m[Jsaumyasoni@Saumyas-MacBook-Pro-2 mac3-backend-a % [K[?2004h[7m/usr/bin/curl -i "$u/api/statu[7ms[7m"[27m[K[A[48C[27m/[27mu[27ms[27mr[27m/[27mb[27mi[27mn[27m/[27mc[27mu[27mr[27ml[27m [27m-[27mi[27m [27m"[27m$[27mu[27m/[27ma[27mp[27mi[27m/[27ms[27mt[27ma[27mt[27mus[27m"[?2004l
+HTTP/1.1 200 OK
+[1mServer[0m: nginx/1.31.9
+[1mDate[0m: Sun, 22 Nov 2026 19:16:05 GMT
+[1mContent-Type[0m: application/json
+[1mContent-Length[0m: 32
+[1mConnection[0m: keep-alive
+[1mCache-Control[0m: no-store
+[1mX-Backend[0m: B
+[1mX-Edge[0m: Mac2
+
+{"backend": "B", "status": "ok"}[1m[7m%[27m[1m[0m                                                                                ]7;file://Saumyas-MacBook-Pro-2.local/Users/saumyasoni/Downloads/mac3-backend-a[0m[27m[24m[Jsaumyasoni@Saumyas-MacBook-Pro-2 mac3-backend-a % [K[?2004h/usr/bin/curl -i "$u/api/status"[K[A[48C[K[1B[K[A[50C/usr/bin/curl -i "$u/api/status"[K[A[48C[K[1B[K[A[50C/usr/bin/curl -i "$u/api/status"[K[A[48Cbash lab test[K[1B[K[A[63C[13Dclear        [8Dbash lab test[13D/usr/bin/curl -i "$u/api/status"[K[A[48C[K[1B[K[A[50C[?2004l[1B[1m[7m%[27m[1m[0m                                                                                ]7;file://Saumyas-MacBook-Pro-2.local/Users/saumyasoni/Downloads/mac3-backend-a[0m[27m[24m[Jsaumyasoni@Saumyas-MacBook-Pro-2 mac3-backend-a % [K[?2004hcclear[?2004l
+[3J[H[2J[1m[7m%[27m[1m[0m                                                                                ]7;file://Saumyas-MacBook-Pro-2.local/Users/saumyasoni/Downloads/mac3-backend-a[0m[27m[24m[Jsaumyasoni@Saumyas-MacBook-Pro-2 mac3-backend-a % [K[?2004h[7mBACKEND=A PORT=3001 python3 ba[7mc[7mkend.py[27m[K[A[42C[27mB[27mA[27mC[27mK[27mE[27mN[27mD[27m=[27mA[27m [27mP[27mO[27mR[27mT[27m=[27m3[27m0[27m0[27m1[27m [27mp[27my[27mt[27mh[27mo[27mn[27m3[27m [27mb[27mac[27mk[27me[27mn[27md[27m.[27mp[27my[?2004l
+Backend A running on 0.0.0.0:3001
+[90m10.7.19.44 - - [23/Nov/2026 01:04:37][0m "HEAD [36m/[0m HTTP/1.1" [32m200 [90m-[0m
+c^C^CTraceback (most recent call last):
+  File "/Users/saumyasoni/Downloads/mac3-backend-a/backend.py", line 91, in <module>
+    server.serve_forever()
+  File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/socketserver.py", line 232, in serve_forever
+    ready = selector.select(poll_interval)
+  File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/selectors.py", line 398, in select
+    fd_event_list = self._selector.poll(timeout)
+KeyboardInterrupt
+
+[1m[7m%[27m[1m[0m                                                                                ]7;file://Saumyas-MacBook-Pro-2.local/Users/saumyasoni/Downloads/mac3-backend-a[0m[27m[24m[Jsaumyasoni@Saumyas-MacBook-Pro-2 mac3-backend-a % [K[?2004hcclear[?2004l
+[3J[H[2J[1m[7m%[27m[1m[0m                                                                                ]7;file://Saumyas-MacBook-Pro-2.local/Users/saumyasoni/Downloads/mac3-backend-a[0m[27m[24m[Jsaumyasoni@Saumyas-MacBook-Pro-2 mac3-backend-a % [K[?2004h[7mmake inventory[27m[14D[27mm[27ma[27mk[27me[27m [27mi[27mn[27mv[27me[27mn[27mt[27mo[27mr[27my[?2004l
+Mon Nov 23 01:40:13 IST 2026
+Saumyas-MacBook-Pro-2.local
+make inventory
+Saumyas-MacBook-Pro-2.local
+en0: flags=8863<UP,BROADCAST,SMART,RUNNING,SIMPLEX,MULTICAST> mtu 1500
+	options=6460<TSO4,TSO6,CHANNEL_IO,PARTIAL_CSUM,ZEROINVERT_CSUM>
+	ether 52:52:71:3a:7e:25
+	inet6 fe80::1c37:23e3:8474:fdd1%en0 prefixlen 64 secured scopeid 0xb 
+	inet 10.7.8.159 netmask 0xffffe000 broadcast 10.7.31.255
+	nd6 options=201<PERFORMNUD,DAD>
+	media: autoselect
+	status: active
+   route to: default
+destination: default
+       mask: default
+    gateway: 10.7.0.1
+  interface: en0
+      flags: <UP,GATEWAY,DONE,STATIC,PRCLONING,GLOBAL>
+ recvpipe  sendpipe  ssthresh  rtt,msec    rttvar  hopcount      mtu     expire
+       0         0         0         0         0         0      1500         0 
+PING 10.7.15.3 (10.7.15.3): 56 data bytes
+64 bytes from 10.7.15.3: icmp_seq=0 ttl=64 time=177.625 ms
+64 bytes from 10.7.15.3: icmp_seq=1 ttl=64 time=200.352 ms
+
+--- 10.7.15.3 ping statistics ---
+2 packets transmitted, 2 packets received, 0.0% packet loss
+round-trip min/avg/max/stddev = 177.625/188.988/200.352/11.364 ms
+PING 10.7.19.44 (10.7.19.44): 56 data bytes
+64 bytes from 10.7.19.44: icmp_seq=0 ttl=64 time=82.276 ms
+64 bytes from 10.7.19.44: icmp_seq=1 ttl=64 time=99.576 ms
+
+--- 10.7.19.44 ping statistics ---
+2 packets transmitted, 2 packets received, 0.0% packet loss
+round-trip min/avg/max/stddev = 82.276/90.926/99.576/8.650 ms
+PING 10.7.8.159 (10.7.8.159): 56 data bytes
+64 bytes from 10.7.8.159: icmp_seq=0 ttl=64 time=1.795 ms
+64 bytes from 10.7.8.159: icmp_seq=1 ttl=64 time=3.442 ms
+
+--- 10.7.8.159 ping statistics ---
+2 packets transmitted, 2 packets received, 0.0% packet loss
+round-trip min/avg/max/stddev = 1.795/2.619/3.442/0.824 ms
+PING 10.7.10.8 (10.7.10.8): 56 data bytes
+64 bytes from 10.7.10.8: icmp_seq=0 ttl=64 time=90.182 ms
+64 bytes from 10.7.10.8: icmp_seq=1 ttl=64 time=218.085 ms
+
+--- 10.7.10.8 ping statistics ---
+2 packets transmitted, 2 packets received, 0.0% packet loss
+round-trip min/avg/max/stddev = 90.182/154.133/218.085/63.952 ms
+[1m[7m%[27m[1m[0m                                                                                ]7;file://Saumyas-MacBook-Pro-2.local/Users/saumyasoni/Downloads/mac3-backend-a[0m[27m[24m[Jsaumyasoni@Saumyas-MacBook-Pro-2 mac3-backend-a % [K[?2004h[7mmake test[27m[9D[27mm[27ma[27mk[27me[27m [27mt[27me[27ms[27mt[?2004l
+Mon Nov 23 01:40:51 IST 2026
+Saumyas-MacBook-Pro-2.local
+make test
+
+; <<>> DiG 9.10.6 <<>> @10.7.15.3 app.team1.test
+; (1 server found)
+;; global options: +cmd
+;; Got answer:
+;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 29324
+;; flags: qr aa rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version: 0, flags:; udp: 1232
+;; QUESTION SECTION:
+;app.team1.test.			IN	A
+
+;; ANSWER SECTION:
+app.team1.test.		30	IN	A	10.7.19.44
+
+;; Query time: 12 msec
+;; SERVER: 10.7.15.3#53(10.7.15.3)
+;; WHEN: Mon Nov 23 01:40:51 IST 2026
+;; MSG SIZE  rcvd: 59
+
+
+; <<>> DiG 9.10.6 <<>> @10.7.15.3 api.team1.test
+; (1 server found)
+;; global options: +cmd
+;; Got answer:
+;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 22845
+;; flags: qr aa rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version: 0, flags:; udp: 1232
+;; QUESTION SECTION:
+;api.team1.test.			IN	A
+
+;; ANSWER SECTION:
+api.team1.test.		30	IN	A	10.7.19.44
+
+;; Query time: 8 msec
+;; SERVER: 10.7.15.3#53(10.7.15.3)
+;; WHEN: Mon Nov 23 01:40:51 IST 2026
+;; MSG SIZE  rcvd: 59
+
+name: app.team1.test
+ip_address: 10.7.19.44
+
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0* Host app.team1.test:8443 was resolved.
+* IPv6: (none)
+* IPv4: 10.7.19.44
+*   Trying 10.7.19.44:8443...
+* Connected to app.team1.test (10.7.19.44) port 8443
+* ALPN: curl offers http/1.1
+* (304) (OUT), TLS handshake, Client hello (1):
+} [316 bytes data]
+*  CAfile: /etc/ssl/cert.pem
+*  CApath: none
+* (304) (IN), TLS handshake, Server hello (2):
+{ [106 bytes data]
+* TLSv1.2 (IN), TLS handshake, Certificate (11):
+{ [867 bytes data]
+* TLSv1.2 (IN), TLS handshake, Server key exchange (12):
+{ [300 bytes data]
+* TLSv1.2 (IN), TLS handshake, Server finished (14):
+{ [4 bytes data]
+* TLSv1.2 (OUT), TLS handshake, Client key exchange (16):
+} [37 bytes data]
+* TLSv1.2 (OUT), TLS change cipher, Change cipher spec (1):
+} [1 bytes data]
+* TLSv1.2 (OUT), TLS handshake, Finished (20):
+} [16 bytes data]
+* TLSv1.2 (IN), TLS change cipher, Change cipher spec (1):
+{ [1 bytes data]
+* TLSv1.2 (IN), TLS handshake, Finished (20):
+{ [16 bytes data]
+* SSL connection using TLSv1.2 / ECDHE-RSA-CHACHA20-POLY1305 / [blank] / UNDEF
+* ALPN: server accepted http/1.1
+* Server certificate:
+*  subject: CN=app.team1.test
+*  start date: Nov 22 14:16:07 2026 GMT
+*  expire date: May 21 14:16:07 2027 GMT
+*  subjectAltName: host "app.team1.test" matched cert's "app.team1.test"
+*  issuer: CN=app.team1.test
+*  SSL certificate verify ok.
+* using HTTP/1.x
+> GET / HTTP/1.1
+> Host: app.team1.test:8443
+> User-Agent: curl/8.7.1
+> Accept: */*
+> 
+* Request completely sent off
+< HTTP/1.1 200 OK
+< Server: nginx/1.31.9
+< Date: Sun, 22 Nov 2026 20:10:52 GMT
+< Content-Type: application/json
+< Content-Length: 32
+< Connection: keep-alive
+< Cache-Control: no-store
+< X-Backend: A
+< X-Edge: Mac2
+< 
+{ [32 bytes data]
+100    32  100    32    0     0    133      0 --:--:-- --:--:-- --:--:--   133
+* Connection #0 to host app.team1.test left intact
+{"backend": "A", "status": "ok"}HTTP/1.1 200 OK
+Server: nginx/1.31.9
+Date: Sun, 22 Nov 2026 20:10:52 GMT
+Content-Type: application/json
+Content-Length: 32
+Connection: keep-alive
+Cache-Control: no-store
+X-Backend: B
+X-Edge: Mac2
+
+{"backend": "B", "status": "ok"}
+HTTP/1.1 200 OK
+Server: nginx/1.31.9
+Date: Sun, 22 Nov 2026 20:10:52 GMT
+Content-Type: application/json
+Content-Length: 32
+Connection: keep-alive
+Cache-Control: no-store
+X-Backend: A
+X-Edge: Mac2
+
+{"backend": "A", "status": "ok"}
+HTTP/1.1 200 OK
+Server: nginx/1.31.9
+Date: Sun, 22 Nov 2026 20:10:52 GMT
+Content-Type: application/json
+Content-Length: 32
+Connection: keep-alive
+Cache-Control: no-store
+X-Backend: B
+X-Edge: Mac2
+
+{"backend": "B", "status": "ok"}
+HTTP/1.1 200 OK
+Server: nginx/1.31.9
+Date: Sun, 22 Nov 2026 20:10:52 GMT
+Content-Type: application/json
+Content-Length: 32
+Connection: keep-alive
+Cache-Control: no-store
+X-Backend: A
+X-Edge: Mac2
+
+{"backend": "A", "status": "ok"}
+HTTP/1.1 200 OK
+Server: nginx/1.31.9
+Date: Sun, 22 Nov 2026 20:10:52 GMT
+Content-Type: application/json
+Content-Length: 32
+Connection: keep-alive
+Cache-Control: no-store
+X-Backend: B
+X-Edge: Mac2
+
+{"backend": "B", "status": "ok"}
+HTTP/1.1 200 OK
+Server: nginx/1.31.9
+Date: Sun, 22 Nov 2026 20:10:53 GMT
+Content-Type: application/json
+Content-Length: 32
+Connection: keep-alive
+Cache-Control: no-store
+X-Backend: A
+X-Edge: Mac2
+
+{"backend": "A", "status": "ok"}
+HTTP/1.1 200 OK
+Server: nginx/1.31.9
+Date: Sun, 22 Nov 2026 20:10:53 GMT
+Content-Type: text/plain
+Content-Length: 49
+Connection: keep-alive
+Cache-Control: max-age=60
+ETag: "team1-cache-v1"
+X-Backend: B
+X-Edge: Mac2
+
+HTTP/1.1 304 Not Modified
+Server: nginx/1.31.9
+Date: Sun, 22 Nov 2026 20:10:53 GMT
+Connection: keep-alive
+ETag: "team1-cache-v1"
+Cache-Control: max-age=60
+X-Backend: A
+X-Edge: Mac2
+
+[1m[7m%[27m[1m[0m                                                                                ]7;file://Saumyas-MacBook-Pro-2.local/Users/saumyasoni/Downloads/mac3-backend-a[0m[27m[24m[Jsaumyasoni@Saumyas-MacBook-Pro-2 mac3-backend-a % [K[?2004h[7mmake balance[27m[12D[27mm[27ma[27mk[27me[27m [27mb[27ma[27ml[27ma[27mn[27mc[27me[?2004l
+Mon Nov 23 01:40:59 IST 2026
+Saumyas-MacBook-Pro-2.local
+make balance
+HTTP/1.1 200 OK
+Server: nginx/1.31.9
+Date: Sun, 22 Nov 2026 20:11:00 GMT
+Content-Type: application/json
+Content-Length: 32
+Connection: keep-alive
+Cache-Control: no-store
+X-Backend: B
+X-Edge: Mac2
+
+HTTP/1.1 200 OK
+Server: nginx/1.31.9
+Date: Sun, 22 Nov 2026 20:11:00 GMT
+Content-Type: application/json
+Content-Length: 32
+Connection: keep-alive
+Cache-Control: no-store
+X-Backend: A
+X-Edge: Mac2
+
+HTTP/1.1 200 OK
+Server: nginx/1.31.9
+Date: Sun, 22 Nov 2026 20:11:00 GMT
+Content-Type: application/json
+Content-Length: 32
+Connection: keep-alive
+Cache-Control: no-store
+X-Backend: B
+X-Edge: Mac2
+
+HTTP/1.1 200 OK
+Server: nginx/1.31.9
+Date: Sun, 22 Nov 2026 20:11:00 GMT
+Content-Type: application/json
+Content-Length: 32
+Connection: keep-alive
+Cache-Control: no-store
+X-Backend: A
+X-Edge: Mac2
+
+HTTP/1.1 200 OK
+Server: nginx/1.31.9
+Date: Sun, 22 Nov 2026 20:11:00 GMT
+Content-Type: application/json
+Content-Length: 32
+Connection: keep-alive
+Cache-Control: no-store
+X-Backend: B
+X-Edge: Mac2
+
+HTTP/1.1 200 OK
+Server: nginx/1.31.9
+Date: Sun, 22 Nov 2026 20:11:00 GMT
+Content-Type: application/json
+Content-Length: 32
+Connection: keep-alive
+Cache-Control: no-store
+X-Backend: A
+X-Edge: Mac2
+
+[1m[7m%[27m[1m[0m                                                                                ]7;file://Saumyas-MacBook-Pro-2.local/Users/saumyasoni/Downloads/mac3-backend-a[0m[27m[24m[Jsaumyasoni@Saumyas-MacBook-Pro-2 mac3-backend-a % [K[?2004h[7msaumyasoni@Saumyas-MacBook-Pro[7m-[7m2 mac3-backend-a % make start[27m[K
+[7mmake: *** No rule to make target `start'.  Stop.[27m[K
+[7msaumyasoni@Saumyas-MacBook-Pro-2 mac3-backend-a % [27m[K
+[K[4A[50C[27ms[27ma[27mu[27mm[27my[27ma[27ms[27mo[27mn[27mi[27m@[27mS[27ma[27mu[27mm[27my[27ma[27ms[27m-[27mM[27ma[27mc[27mB[27mo[27mo[27mk[27m-[27mP[27mr[27mo-[27m2[27m [27mm[27ma[27mc[27m3[27m-[27mb[27ma[27mc[27mk[27me[27mn[27md[27m-[27ma[27m [27m%[27m [27mm[27ma[27mk[27me[27m [27ms[27mt[27ma[27mr[27mt[1B[27mm[27ma[27mk[27me[27m:[27m [27m*[27m*[27m*[27m [27mN[27mo[27m [27mr[27mu[27ml[27me[27m [27mt[27mo[27m [27mm[27ma[27mk[27me[27m [27mt[27ma[27mr[27mg[27me[27mt[27m [27m`[27ms[27mt[27ma[27mr[27mt[27m'[27m.[27m [27m [27mS[27mt[27mo[27mp[27m.[1B[27ms[27ma[27mu[27mm[27my[27ma[27ms[27mo[27mn[27mi[27m@[27mS[27ma[27mu[27mm[27my[27ma[27ms[27m-[27mM[27ma[27mc[27mB[27mo[27mo[27mk[27m-[27mP[27mr[27mo[27m-[27m2[27m [27mm[27ma[27mc[27m3[27m-[27mb[27ma[27mc[27mk[27me[27mn[27md[27m-[27ma[27m [27m%[K[1B[K[A[A[A[A[50Cmake balance[K[1B[K[1B[K[1B[K[1B[K[4A[62Ctest   inventory[9Dtest     inventory[14Dclear         [9DBACKEND=A PORT=3001 python3 backend.py[K[A[42Cclear[K[1B[K[A[55C/usr/bin/curl -i "$u/api/status"[K[A[48Cbash lab test[K[1B[K[A[63C[13D/usr/bin/curl -i "$u/api/status"[K[A[48Cclear[K[1B[K[A[55CBACKEND=A PORT=3001 python3 backend.py[K[A[42Cclear[K[1B[K[A[55Cmake inventory[9Dtest     balance[12Dsaumyasoni@Saumyas-MacBook-Pro-2 mac3-backend-a % make start[K[1Bmake: *** No rule to make target `start'.  Stop.[K[1Bsaumyasoni@Saumyas-MacBook-Pro-2 mac3-backend-a %[K[1B[K[K[?2004l
+[0m[27m[24m[Jbquote> [K[?2004h[?2004l
+[1m[7m%[27m[1m[0m                                                                                ]7;file://Saumyas-MacBook-Pro-2.local/Users/saumyasoni/Downloads/mac3-backend-a[0m[27m[24m[Jsaumyasoni@Saumyas-MacBook-Pro-2 mac3-backend-a % [K[?2004h[7mmake capture[27m[12D[27mm[27ma[27mk[27me[27m [27mc[27ma[27mp[27mt[27mu[27mr[27me[?2004l
+Mon Nov 23 01:41:58 IST 2026
+Saumyas-MacBook-Pro-2.local
+make capture
+Password:
+tcpdump: listening on en0, link-type EN10MB (Ethernet), snapshot length 524288 bytes
+^Cmake: *** [capture] Error 130
+
+[1m[7m%[27m[1m[0m                                                                                ]7;file://Saumyas-MacBook-Pro-2.local/Users/saumyasoni/Downloads/mac3-backend-a[0m[27m[24m[Jsaumyasoni@Saumyas-MacBook-Pro-2 mac3-backend-a % [K[?2004hccd evidence[1m/[0m[0m [?2004l
+[1m[7m%[27m[1m[0m                                                                                ]7;file://Saumyas-MacBook-Pro-2.local/Users/saumyasoni/Downloads/mac3-backend-a/evidence[0m[27m[24m[Jsaumyasoni@Saumyas-MacBook-Pro-2 evidence % [K[?2004hlls[?2004l
+balance-20261123-014059-15164.txt
+capture-20261123-014158-15246.txt
+cutover.txt
+flow-1795360361.pcap
+flow-1795378318.pcap
+flush-20261123-014227-15284.txt
+healthy-baseline.txt
+https-20261123-013954-15032.txt
+https-20261123-014233-15316.txt
+inventory-20261123-014013-15065.txt
+inventory.txt
+lookup-20261123-013954-15011.txt
+return-to-primary.txt
+Saumyas-MacBook-Pro-2-rehearsal-20261123-003728.txt
+Saumyas-MacBook-Pro-2-review2-20261123-005453.txt
+start-20261123-013642-14790.txt
+test-1795357346.txt
+test-1795357370.txt
+test-1795357526.txt
+test-1795358470.txt
+test-1795359587.txt
+test-1795360500.txt
+test-1795374902.txt
+test-1795378251.txt
+test-20261123-014051-15124.txt
+[1m[7m%[27m[1m[0m                                                                                ]7;file://Saumyas-MacBook-Pro-2.local/Users/saumyasoni/Downloads/mac3-backend-a/evidence[0m[27m[24m[Jsaumyasoni@Saumyas-MacBook-Pro-2 evidence % [K[?2004hlls -a[?2004l
+.
+..
+.DS_Store
+balance-20261123-014059-15164.txt
+capture-20261123-014158-15246.txt
+cutover.txt
+flow-1795360361.pcap
+flow-1795378318.pcap
+flush-20261123-014227-15284.txt
+healthy-baseline.txt
+https-20261123-013954-15032.txt
+https-20261123-014233-15316.txt
+inventory-20261123-014013-15065.txt
+inventory.txt
+lookup-20261123-013954-15011.txt
+return-to-primary.txt
+Saumyas-MacBook-Pro-2-rehearsal-20261123-003728.txt
+Saumyas-MacBook-Pro-2-review2-20261123-005453.txt
+start-20261123-013642-14790.txt
+test-1795357346.txt
+test-1795357370.txt
+test-1795357526.txt
+test-1795358470.txt
+test-1795359587.txt
+test-1795360500.txt
+test-1795374902.txt
+test-1795378251.txt
+test-20261123-014051-15124.txt
+[1m[7m%[27m[1m[0m                                                                                ]7;file://Saumyas-MacBook-Pro-2.local/Users/saumyasoni/Downloads/mac3-backend-a/evidence[0m[27m[24m[Jsaumyasoni@Saumyas-MacBook-Pro-2 evidence % [K[?2004hcclear[?2004l
+[3J[H[2J[1m[7m%[27m[1m[0m                                                                                ]7;file://Saumyas-MacBook-Pro-2.local/Users/saumyasoni/Downloads/mac3-backend-a/evidence[0m[27m[24m[Jsaumyasoni@Saumyas-MacBook-Pro-2 evidence % [K[?2004h[7mmake capture[27m[12D[27mm[27ma[27mk[27me[27m [27mc[27ma[27mp[27mt[27mu[27mr[27me[?2004l
+make: *** No rule to make target `capture'.  Stop.
+[1m[7m%[27m[1m[0m                                                                                ]7;file://Saumyas-MacBook-Pro-2.local/Users/saumyasoni/Downloads/mac3-backend-a/evidence[0m[27m[24m[Jsaumyasoni@Saumyas-MacBook-Pro-2 evidence % [K[?2004hccd ..[?2004l
+[1m[7m%[27m[1m[0m                                                                                ]7;file://Saumyas-MacBook-Pro-2.local/Users/saumyasoni/Downloads/mac3-backend-a[0m[27m[24m[Jsaumyasoni@Saumyas-MacBook-Pro-2 mac3-backend-a % [K[?2004hcclear[?2004l
+[3J[H[2J[1m[7m%[27m[1m[0m                                                                                ]7;file://Saumyas-MacBook-Pro-2.local/Users/saumyasoni/Downloads/mac3-backend-a[0m[27m[24m[Jsaumyasoni@Saumyas-MacBook-Pro-2 mac3-backend-a % [K[?2004h[7mmake capture[27m[12D[27mm[27ma[27mk[27me[27m [27mc[27ma[27mp[27mt[27mu[27mr[27me[?2004l
+Mon Nov 23 01:44:37 IST 2026
+Saumyas-MacBook-Pro-2.local
+make capture
+tcpdump: listening on en0, link-type EN10MB (Ethernet), snapshot length 524288 bytes
+^Cmake: *** [capture] Error 130
+
+[1m[7m%[27m[1m[0m                                                                                ]7;file://Saumyas-MacBook-Pro-2.local/Users/saumyasoni/Downloads/mac3-backend-a[0m[27m[24m[Jsaumyasoni@Saumyas-MacBook-Pro-2 mac3-backend-a % [K[?2004h[7mmake balance[27m[12D[27mm[27ma[27mk[27me[27m [27mb[27ma[27ml[27ma[27mn[27mc[27me[?2004l
+Mon Nov 23 01:50:31 IST 2026
+Saumyas-MacBook-Pro-2.local
+make balance
+HTTP/1.1 200 OK
+Server: nginx/1.31.9
+Date: Sun, 22 Nov 2026 20:20:32 GMT
+Content-Type: application/json
+Content-Length: 32
+Connection: keep-alive
+Cache-Control: no-store
+X-Backend: A
+X-Edge: Mac2
+
+HTTP/1.1 200 OK
+Server: nginx/1.31.9
+Date: Sun, 22 Nov 2026 20:20:32 GMT
+Content-Type: application/json
+Content-Length: 32
+Connection: keep-alive
+Cache-Control: no-store
+X-Backend: B
+X-Edge: Mac2
+
+HTTP/1.1 200 OK
+Server: nginx/1.31.9
+Date: Sun, 22 Nov 2026 20:20:32 GMT
+Content-Type: application/json
+Content-Length: 32
+Connection: keep-alive
+Cache-Control: no-store
+X-Backend: A
+X-Edge: Mac2
+
+HTTP/1.1 200 OK
+Server: nginx/1.31.9
+Date: Sun, 22 Nov 2026 20:20:32 GMT
+Content-Type: application/json
+Content-Length: 32
+Connection: keep-alive
+Cache-Control: no-store
+X-Backend: B
+X-Edge: Mac2
+
+HTTP/1.1 200 OK
+Server: nginx/1.31.9
+Date: Sun, 22 Nov 2026 20:20:32 GMT
+Content-Type: application/json
+Content-Length: 32
+Connection: keep-alive
+Cache-Control: no-store
+X-Backend: A
+X-Edge: Mac2
+
+HTTP/1.1 200 OK
+Server: nginx/1.31.9
+Date: Sun, 22 Nov 2026 20:20:32 GMT
+Content-Type: application/json
+Content-Length: 32
+Connection: keep-alive
+Cache-Control: no-store
+X-Backend: B
+X-Edge: Mac2
+
+[1m[7m%[27m[1m[0m                                                                                ]7;file://Saumyas-MacBook-Pro-2.local/Users/saumyasoni/Downloads/mac3-backend-a[0m[27m[24m[Jsaumyasoni@Saumyas-MacBook-Pro-2 mac3-backend-a % [K[?2004h

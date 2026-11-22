@@ -1,0 +1,5 @@
+
+; <<>> DiG 9.10.6 <<>> @10.7.15.3 app.team1.test
+; (1 server found)
+;; global options: +cmd
+;; connection timed out; no servers could be reached

@@ -1,0 +1,48 @@
+Mon Nov 23 01:40:13 IST 2026
+Saumyas-MacBook-Pro-2.local
+make inventory
+Saumyas-MacBook-Pro-2.local
+en0: flags=8863<UP,BROADCAST,SMART,RUNNING,SIMPLEX,MULTICAST> mtu 1500
+	options=6460<TSO4,TSO6,CHANNEL_IO,PARTIAL_CSUM,ZEROINVERT_CSUM>
+	ether 52:52:71:3a:7e:25
+	inet6 fe80::1c37:23e3:8474:fdd1%en0 prefixlen 64 secured scopeid 0xb 
+	inet 10.7.8.159 netmask 0xffffe000 broadcast 10.7.31.255
+	nd6 options=201<PERFORMNUD,DAD>
+	media: autoselect
+	status: active
+   route to: default
+destination: default
+       mask: default
+    gateway: 10.7.0.1
+  interface: en0
+      flags: <UP,GATEWAY,DONE,STATIC,PRCLONING,GLOBAL>
+ recvpipe  sendpipe  ssthresh  rtt,msec    rttvar  hopcount      mtu     expire
+       0         0         0         0         0         0      1500         0 
+PING 10.7.15.3 (10.7.15.3): 56 data bytes
+64 bytes from 10.7.15.3: icmp_seq=0 ttl=64 time=177.625 ms
+64 bytes from 10.7.15.3: icmp_seq=1 ttl=64 time=200.352 ms
+
+--- 10.7.15.3 ping statistics ---
+2 packets transmitted, 2 packets received, 0.0% packet loss
+round-trip min/avg/max/stddev = 177.625/188.988/200.352/11.364 ms
+PING 10.7.19.44 (10.7.19.44): 56 data bytes
+64 bytes from 10.7.19.44: icmp_seq=0 ttl=64 time=82.276 ms
+64 bytes from 10.7.19.44: icmp_seq=1 ttl=64 time=99.576 ms
+
+--- 10.7.19.44 ping statistics ---
+2 packets transmitted, 2 packets received, 0.0% packet loss
+round-trip min/avg/max/stddev = 82.276/90.926/99.576/8.650 ms
+PING 10.7.8.159 (10.7.8.159): 56 data bytes
+64 bytes from 10.7.8.159: icmp_seq=0 ttl=64 time=1.795 ms
+64 bytes from 10.7.8.159: icmp_seq=1 ttl=64 time=3.442 ms
+
+--- 10.7.8.159 ping statistics ---
+2 packets transmitted, 2 packets received, 0.0% packet loss
+round-trip min/avg/max/stddev = 1.795/2.619/3.442/0.824 ms
+PING 10.7.10.8 (10.7.10.8): 56 data bytes
+64 bytes from 10.7.10.8: icmp_seq=0 ttl=64 time=90.182 ms
+64 bytes from 10.7.10.8: icmp_seq=1 ttl=64 time=218.085 ms
+
+--- 10.7.10.8 ping statistics ---
+2 packets transmitted, 2 packets received, 0.0% packet loss
+round-trip min/avg/max/stddev = 90.182/154.133/218.085/63.952 ms
