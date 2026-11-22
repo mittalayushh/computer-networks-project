@@ -94,6 +94,7 @@ CFG
   sudo install -m 644 run/resolver /etc/resolver/team1.test
   bash lab flush ;;
  flush) sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder ;;
+ capture) exec sudo tcpdump -i "$iface" -s0 -w "evidence/flow-$(date +%s).pcap" '(udp port 53 or tcp port 8443)' ;;
  unresolve) test -f run/resolver-owned; sudo rm -f /etc/resolver/team1.test; rm run/resolver-owned; bash lab flush ;;
  *) echo 'See RUNBOOK.md'; exit 2;;
 esac
