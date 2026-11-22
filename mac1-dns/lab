@@ -95,6 +95,14 @@ CFG
   bash lab flush ;;
  flush) sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder ;;
  capture) exec sudo tcpdump -i "$iface" -s0 -w "evidence/flow-$(date +%s).pcap" '(udp port 53 or tcp port 8443)' ;;
+ test)
+  set -o pipefail
+  { dig @"$M1" app.team1.test; dig @"$M1" api.team1.test; dscacheutil -q host -a name app.team1.test
+    /usr/bin/curl -fv --http1.1 "$url/"
+    for i in {1..6}; do /usr/bin/curl -fsS -i "$url/api/status"; echo; done
+    /usr/bin/curl -fsSI "$url/cache-demo"
+    /usr/bin/curl -sSi -H 'If-None-Match: "team1-cache-v1"' "$url/cache-demo"
+  } 2>&1 | tee "evidence/test-$(date +%s).txt" ;;
  unresolve) test -f run/resolver-owned; sudo rm -f /etc/resolver/team1.test; rm run/resolver-owned; bash lab flush ;;
  *) echo 'See RUNBOOK.md'; exit 2;;
 esac
