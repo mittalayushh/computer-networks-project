@@ -103,6 +103,24 @@ CFG
     /usr/bin/curl -fsSI "$url/cache-demo"
     /usr/bin/curl -sSi -H 'If-None-Match: "team1-cache-v1"' "$url/cache-demo"
   } 2>&1 | tee "evidence/test-$(date +%s).txt" ;;
+ isolate)
+  case $role in 3) port=3001;; 4) port=3002;; *) exit 2;; esac
+  anchor=com.apple/cn-team1
+  sudo pfctl -sr | grep -F 'anchor "com.apple/*"' >/dev/null || { echo 'Default Apple filter anchor required'; exit 1; }
+  [[ ! -e run/pf.token ]] || { echo 'Isolation already enabled'; exit 1; }
+  sudo pfctl -a "$anchor" -sr > run/pf.before
+  [[ ! -s run/pf.before ]] || { echo 'Project anchor already occupied'; exit 1; }
+  printf 'pass in quick on %s inet proto tcp from %s to any port %s\nblock return in quick on %s inet proto tcp to any port %s\n' "$iface" "$M2" "$port" "$iface" "$port" > run/pf.rules
+  sudo pfctl -n -a "$anchor" -f run/pf.rules
+  sudo pfctl -E 2>&1 | tee run/pf.enable
+  awk '/Token/{print $NF}' run/pf.enable > run/pf.token
+  test -s run/pf.token
+  sudo pfctl -a "$anchor" -f run/pf.rules ;;
+ restore)
+  test -s run/pf.token
+  sudo pfctl -a com.apple/cn-team1 -f run/pf.before
+  sudo pfctl -X "$(cat run/pf.token)"
+  rm run/pf.token ;;
  unresolve) test -f run/resolver-owned; sudo rm -f /etc/resolver/team1.test; rm run/resolver-owned; bash lab flush ;;
  *) echo 'See RUNBOOK.md'; exit 2;;
 esac
