@@ -86,5 +86,14 @@ http {
 CFG
   nginx -t -c "$PWD/run/nginx.conf"
   exec nginx -c "$PWD/run/nginx.conf" -g 'daemon off;' ;;
+ resolver)
+  sudo mkdir -p /etc/resolver
+  [[ ! -e /etc/resolver/team1.test || -f run/resolver-owned ]] || { echo 'Existing team1.test resolver: preserve it and configure manually.'; exit 1; }
+  case ${2:-one} in one) printf 'nameserver %s\n' "$M1";; two) printf 'nameserver %s\nnameserver %s\n' "$M1" "$M4";; wrong) printf 'nameserver %s\n' "$M3";; *) exit 2;; esac > run/resolver
+  touch run/resolver-owned
+  sudo install -m 644 run/resolver /etc/resolver/team1.test
+  bash lab flush ;;
+ flush) sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder ;;
+ unresolve) test -f run/resolver-owned; sudo rm -f /etc/resolver/team1.test; rm run/resolver-owned; bash lab flush ;;
  *) echo 'See RUNBOOK.md'; exit 2;;
 esac
